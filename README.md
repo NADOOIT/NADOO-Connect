@@ -1,7 +1,6 @@
-# NADOO Connect!
-
 ![NADOO Connect Logo](https://github.com/NADOOITChristophBa/NADOO-Connect/assets/106314951/fa6ff6b4-bdb9-4621-ad04-8f6aa65f4aea)
 
+# NADOO Connect
 
 ## About the Project
 
