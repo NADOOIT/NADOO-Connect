@@ -1,6 +1,6 @@
 # NADOO Connect!
 
-[DALL·E 2023-12-22 16 55 36 - Design a modern and professional logo for a tech project named 'NADOO Connect', emphasizing its focus on email communication  The logo should incorpor](https://github.com/NADOOITChristophBa/NADOO-Connect/assets/106314951/fa6ff6b4-bdb9-4621-ad04-8f6aa65f4aea)
+![NADOO Connect Logo](https://github.com/NADOOITChristophBa/NADOO-Connect/assets/106314951/fa6ff6b4-bdb9-4621-ad04-8f6aa65f4aea)
 
 
 ## About the Project
