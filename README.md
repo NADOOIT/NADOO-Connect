@@ -21,3 +21,15 @@ sequenceDiagram
     KundePC->>KundenEmail: Send encrypted message
     KundenEmail->>KollegenPC: Forward message
     KollegenPC->>KollegenPC: Process message and respond if necessary
+```
+
+## Installation and Usage
+(Detailed instructions for installation and usage of the software)
+
+## License
+This project is licensed under the MIT License. For more details, see the LICENSE file.
+
+## Contributors
+(List of contributors and their roles in the project)
+
+For more information and support, please contact support@nadoo.com.
