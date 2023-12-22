@@ -32,4 +32,4 @@ This project is licensed under the MIT License. For more details, see the LICENS
 ## Contributors
 (List of contributors and their roles in the project)
 
-For more information and support, please contact support@nadoo.com.
+For more information and support, please contact support@nadooit.de.
