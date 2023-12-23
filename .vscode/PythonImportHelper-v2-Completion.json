@@ -1,0 +1,474 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "Fernet",
+        "importPath": "cryptography.fernet",
+        "description": "cryptography.fernet",
+        "isExtraImport": true,
+        "detail": "cryptography.fernet",
+        "documentation": {}
+    },
+    {
+        "label": "aiosmtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiosmtplib",
+        "description": "aiosmtplib",
+        "detail": "aiosmtplib",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "simpledialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Tk",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline_to_binary",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "publish_cmdline",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "default_description",
+        "importPath": "docutils.core",
+        "description": "docutils.core",
+        "isExtraImport": true,
+        "detail": "docutils.core",
+        "documentation": {}
+    },
+    {
+        "label": "locale",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "locale",
+        "description": "locale",
+        "detail": "locale",
+        "documentation": {}
+    },
+    {
+        "label": "manpage",
+        "importPath": "docutils.writers",
+        "description": "docutils.writers",
+        "isExtraImport": true,
+        "detail": "docutils.writers",
+        "documentation": {}
+    },
+    {
+        "label": "Writer",
+        "importPath": "docutils.writers.odf_odt",
+        "description": "docutils.writers.odf_odt",
+        "isExtraImport": true,
+        "detail": "docutils.writers.odf_odt",
+        "documentation": {}
+    },
+    {
+        "label": "Reader",
+        "importPath": "docutils.writers.odf_odt",
+        "description": "docutils.writers.odf_odt",
+        "isExtraImport": true,
+        "detail": "docutils.writers.odf_odt",
+        "documentation": {}
+    },
+    {
+        "label": "prepstyles",
+        "importPath": "docutils.writers.odf_odt",
+        "description": "docutils.writers.odf_odt",
+        "isExtraImport": true,
+        "detail": "docutils.writers.odf_odt",
+        "documentation": {}
+    },
+    {
+        "label": "setup",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "find_packages",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "load_or_request_config",
+        "kind": 2,
+        "importPath": "NADOO-CONNECT.nadoo_connect",
+        "description": "NADOO-CONNECT.nadoo_connect",
+        "peekOfCode": "def load_or_request_config():\n    # Explicitly load .env file\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",\n        \"PASSWORD\",\n        \"DESTINATION_EMAIL\",\n        \"ENCRYPTION_KEY\",",
+        "detail": "NADOO-CONNECT.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "encrypt_data",
+        "kind": 2,
+        "importPath": "NADOO-CONNECT.nadoo_connect",
+        "description": "NADOO-CONNECT.nadoo_connect",
+        "peekOfCode": "def encrypt_data(data, key):\n    fernet = Fernet(key)\n    encrypted_data = fernet.encrypt(json.dumps(data).encode())\n    return encrypted_data\nasync def send_async_email(\n    subject, message, to_email, smtp_server, smtp_port, email, password\n):\n    # Encode the message in base64 to convert bytes to a string\n    encoded_message = base64.b64encode(message).decode()\n    msg = MIMEText(encoded_message, _subtype=\"plain\", _charset=\"utf-8\")",
+        "detail": "NADOO-CONNECT.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "create_execution",
+        "kind": 2,
+        "importPath": "NADOO-CONNECT.nadoo_connect",
+        "description": "NADOO-CONNECT.nadoo_connect",
+        "peekOfCode": "def create_execution(execution_id, data, config):\n    if not execution_id:\n        raise ValueError(\"Execution ID is required.\")\n    encrypted_data = encrypt_data(data, config[\"ENCRYPTION_KEY\"])\n    asyncio.run(\n        send_async_email(\n            \"Execution Created\",\n            encrypted_data,\n            config[\"DESTINATION_EMAIL\"],\n            config[\"SMTP_SERVER\"],",
+        "detail": "NADOO-CONNECT.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "NADOO-CONNECT.nadoo_connect",
+        "description": "NADOO-CONNECT.nadoo_connect",
+        "peekOfCode": "def main():\n    config = load_or_request_config()\n    # Example usage with specific data\n    execution_id = \"specific-uuid-from-database\"\n    data_to_send = {\"example_key\": \"example_value\"}\n    create_execution(execution_id, data_to_send, config)\nif __name__ == \"__main__\":\n    main()",
+        "detail": "NADOO-CONNECT.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2html",
+        "description": "venv.bin.rst2html",
+        "peekOfCode": "description = ('Generates (X)HTML documents from standalone reStructuredText '\n               'sources.  ' + default_description)\npublish_cmdline(writer_name='html', description=description)",
+        "detail": "venv.bin.rst2html",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2html4",
+        "description": "venv.bin.rst2html4",
+        "peekOfCode": "description = ('Generates (X)HTML documents from standalone reStructuredText '\n               'sources.  ' + default_description)\npublish_cmdline(writer_name='html4', description=description)",
+        "detail": "venv.bin.rst2html4",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2html5",
+        "description": "venv.bin.rst2html5",
+        "peekOfCode": "description = ('Generates HTML5 documents from standalone '\n               'reStructuredText sources.\\n'\n               + default_description)\npublish_cmdline(writer_name='html5', description=description)",
+        "detail": "venv.bin.rst2html5",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2latex",
+        "description": "venv.bin.rst2latex",
+        "peekOfCode": "description = ('Generates LaTeX documents from standalone reStructuredText '\n               'sources. '\n               'Reads from <source> (default is stdin) and writes to '\n               '<destination> (default is stdout).  See '\n               '<https://docutils.sourceforge.io/docs/user/latex.html> for '\n               'the full reference.')\npublish_cmdline(writer_name='latex', description=description)",
+        "detail": "venv.bin.rst2latex",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2man",
+        "description": "venv.bin.rst2man",
+        "peekOfCode": "description = (\"Generates plain unix manual documents.  \"\n               + default_description)\npublish_cmdline(writer=manpage.Writer(), description=description)",
+        "detail": "venv.bin.rst2man",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2odt",
+        "description": "venv.bin.rst2odt",
+        "peekOfCode": "description = ('Generates OpenDocument/OpenOffice/ODF documents from '\n               'standalone reStructuredText sources.  ' + default_description)\nwriter = Writer()\nreader = Reader()\noutput = publish_cmdline_to_binary(reader=reader, writer=writer,\n                                   description=description)",
+        "detail": "venv.bin.rst2odt",
+        "documentation": {}
+    },
+    {
+        "label": "writer",
+        "kind": 5,
+        "importPath": "venv.bin.rst2odt",
+        "description": "venv.bin.rst2odt",
+        "peekOfCode": "writer = Writer()\nreader = Reader()\noutput = publish_cmdline_to_binary(reader=reader, writer=writer,\n                                   description=description)",
+        "detail": "venv.bin.rst2odt",
+        "documentation": {}
+    },
+    {
+        "label": "reader",
+        "kind": 5,
+        "importPath": "venv.bin.rst2odt",
+        "description": "venv.bin.rst2odt",
+        "peekOfCode": "reader = Reader()\noutput = publish_cmdline_to_binary(reader=reader, writer=writer,\n                                   description=description)",
+        "detail": "venv.bin.rst2odt",
+        "documentation": {}
+    },
+    {
+        "label": "output",
+        "kind": 5,
+        "importPath": "venv.bin.rst2odt",
+        "description": "venv.bin.rst2odt",
+        "peekOfCode": "output = publish_cmdline_to_binary(reader=reader, writer=writer,\n                                   description=description)",
+        "detail": "venv.bin.rst2odt",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2pseudoxml",
+        "description": "venv.bin.rst2pseudoxml",
+        "peekOfCode": "description = ('Generates pseudo-XML from standalone reStructuredText '\n               'sources (for testing purposes).  ' + default_description)\npublish_cmdline(description=description)",
+        "detail": "venv.bin.rst2pseudoxml",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2s5",
+        "description": "venv.bin.rst2s5",
+        "peekOfCode": "description = ('Generates S5 (X)HTML slideshow documents from standalone '\n               'reStructuredText sources.  ' + default_description)\npublish_cmdline(writer_name='s5', description=description)",
+        "detail": "venv.bin.rst2s5",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2xetex",
+        "description": "venv.bin.rst2xetex",
+        "peekOfCode": "description = ('Generates LaTeX documents from standalone reStructuredText '\n               'sources for compilation with the Unicode-aware TeX variants '\n               'XeLaTeX or LuaLaTeX. '\n               'Reads from <source> (default is stdin) and writes to '\n               '<destination> (default is stdout).  See '\n               '<https://docutils.sourceforge.io/docs/user/latex.html> for '\n               'the full reference.')\npublish_cmdline(writer_name='xetex', description=description)",
+        "detail": "venv.bin.rst2xetex",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rst2xml",
+        "description": "venv.bin.rst2xml",
+        "peekOfCode": "description = ('Generates Docutils-native XML from standalone '\n               'reStructuredText sources.  ' + default_description)\npublish_cmdline(writer_name='xml', description=description)",
+        "detail": "venv.bin.rst2xml",
+        "documentation": {}
+    },
+    {
+        "label": "description",
+        "kind": 5,
+        "importPath": "venv.bin.rstpep2html",
+        "description": "venv.bin.rstpep2html",
+        "peekOfCode": "description = ('Generates (X)HTML from reStructuredText-format PEP files.  '\n               + default_description)\npublish_cmdline(reader_name='pep', writer_name='pep_html',\n                description=description)",
+        "detail": "venv.bin.rstpep2html",
+        "documentation": {}
+    }
+]
