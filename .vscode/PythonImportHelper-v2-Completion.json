@@ -27,19 +27,63 @@
         "documentation": {}
     },
     {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "portalocker",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "portalocker",
+        "description": "portalocker",
+        "detail": "portalocker",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "load_dotenv",
         "importPath": "dotenv",
         "description": "dotenv",
         "isExtraImport": true,
         "detail": "dotenv",
-        "documentation": {}
-    },
-    {
-        "label": "Fernet",
-        "importPath": "cryptography.fernet",
-        "description": "cryptography.fernet",
-        "isExtraImport": true,
-        "detail": "cryptography.fernet",
         "documentation": {}
     },
     {
@@ -49,14 +93,6 @@
         "importPath": "aiosmtplib",
         "description": "aiosmtplib",
         "detail": "aiosmtplib",
-        "documentation": {}
-    },
-    {
-        "label": "MIMEText",
-        "importPath": "email.mime.text",
-        "description": "email.mime.text",
-        "isExtraImport": true,
-        "detail": "email.mime.text",
         "documentation": {}
     },
     {
@@ -84,12 +120,36 @@
         "documentation": {}
     },
     {
-        "label": "base64",
+        "label": "pytest",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "base64",
-        "description": "base64",
-        "detail": "base64",
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "nadoo_connect",
+        "description": "nadoo_connect",
+        "isExtraImport": true,
+        "detail": "nadoo_connect",
         "documentation": {}
     },
     {
@@ -310,39 +370,138 @@
         "documentation": {}
     },
     {
-        "label": "load_or_request_config",
+        "label": "setup_directories",
         "kind": 2,
-        "importPath": "NADOO-CONNECT.nadoo_connect",
-        "description": "NADOO-CONNECT.nadoo_connect",
-        "peekOfCode": "def load_or_request_config():\n    # Explicitly load .env file\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",\n        \"PASSWORD\",\n        \"DESTINATION_EMAIL\",\n        \"ENCRYPTION_KEY\",",
-        "detail": "NADOO-CONNECT.nadoo_connect",
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",\n        \"PASSWORD\",",
+        "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
     {
-        "label": "encrypt_data",
+        "label": "load_or_request_config",
         "kind": 2,
-        "importPath": "NADOO-CONNECT.nadoo_connect",
-        "description": "NADOO-CONNECT.nadoo_connect",
-        "peekOfCode": "def encrypt_data(data, key):\n    fernet = Fernet(key)\n    encrypted_data = fernet.encrypt(json.dumps(data).encode())\n    return encrypted_data\nasync def send_async_email(\n    subject, message, to_email, smtp_server, smtp_port, email, password\n):\n    # Encode the message in base64 to convert bytes to a string\n    encoded_message = base64.b64encode(message).decode()\n    msg = MIMEText(encoded_message, _subtype=\"plain\", _charset=\"utf-8\")",
-        "detail": "NADOO-CONNECT.nadoo_connect",
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def load_or_request_config():\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",\n        \"PASSWORD\",\n        \"DESTINATION_EMAIL\",\n    ]\n    config = {var: os.getenv(var) for var in required_vars}",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "record_execution_in_db",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def record_execution_in_db(execution_uuid, customer_program_uuid, is_sent):\n    conn = sqlite3.connect(\"executions.db\")\n    cursor = conn.cursor()\n    cursor.execute(\n        \"\"\"CREATE TABLE IF NOT EXISTS execution_records \n                      (execution_uuid TEXT, customer_program_uuid TEXT, is_sent BOOLEAN)\"\"\"\n    )\n    cursor.execute(\n        \"INSERT INTO execution_records VALUES (?, ?, ?)\",\n        (execution_uuid, customer_program_uuid, is_sent),",
+        "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
     {
         "label": "create_execution",
         "kind": 2,
-        "importPath": "NADOO-CONNECT.nadoo_connect",
-        "description": "NADOO-CONNECT.nadoo_connect",
-        "peekOfCode": "def create_execution(execution_id, data, config):\n    if not execution_id:\n        raise ValueError(\"Execution ID is required.\")\n    encrypted_data = encrypt_data(data, config[\"ENCRYPTION_KEY\"])\n    asyncio.run(\n        send_async_email(\n            \"Execution Created\",\n            encrypted_data,\n            config[\"DESTINATION_EMAIL\"],\n            config[\"SMTP_SERVER\"],",
-        "detail": "NADOO-CONNECT.nadoo_connect",
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def create_execution(customer_program_uuid):\n    global config, sender_task\n    if config is None:\n        config = load_or_request_config()\n    setup_directories()\n    execution_uuid = str(uuid.uuid4())\n    timestamp = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S.%f\")\n    execution_data = {\n        \"execution_uuid\": execution_uuid,\n        \"customer_program_uuid\": customer_program_uuid,",
+        "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
     {
         "label": "main",
         "kind": 2,
-        "importPath": "NADOO-CONNECT.nadoo_connect",
-        "description": "NADOO-CONNECT.nadoo_connect",
-        "peekOfCode": "def main():\n    config = load_or_request_config()\n    # Example usage with specific data\n    execution_id = \"specific-uuid-from-database\"\n    data_to_send = {\"example_key\": \"example_value\"}\n    create_execution(execution_id, data_to_send, config)\nif __name__ == \"__main__\":\n    main()",
-        "detail": "NADOO-CONNECT.nadoo_connect",
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def main():\n    global config\n    config = load_or_request_config()\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(10):\n        create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    main()",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "executions_dir",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "executions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nconfig = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "lockfile_path",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "lockfile_path = os.path.join(executions_dir, \"sender.lock\")\nconfig = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "config = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    required_vars = [",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "idle_time",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "idle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "max_wait_time",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "max_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "sender_task",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "sender_task = None  # Global variable to keep track of the sender task\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "test_setup_directories",
+        "kind": 2,
+        "importPath": "tests.test_nadoo_connect",
+        "description": "tests.test_nadoo_connect",
+        "peekOfCode": "def test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio\nasync def test_send_async_email():\n    with patch(\"aiosmtplib.SMTP\", new_callable=AsyncMock) as mock_smtp:\n        result = await send_async_email(",
+        "detail": "tests.test_nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "test_record_execution_in_db",
+        "kind": 2,
+        "importPath": "tests.test_nadoo_connect",
+        "description": "tests.test_nadoo_connect",
+        "peekOfCode": "def test_record_execution_in_db():\n    # Optionally, use an in-memory database for testing\n    # conn = sqlite3.connect(\":memory:\")\n    # cursor = conn.cursor()\n    # Replace the connection line in the record_execution_in_db function with\n    # cursor.execute(\"...\") and pass the cursor instead of opening a new connection.\n    record_execution_in_db(\"uuid\", \"program_uuid\", True)\n    conn = sqlite3.connect(\n        \"executions.db\"\n    )  # Consider using an in-memory database for testing",
+        "detail": "tests.test_nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_execution",
+        "kind": 2,
+        "importPath": "tests.test_nadoo_connect",
+        "description": "tests.test_nadoo_connect",
+        "peekOfCode": "def test_create_execution():\n    # Setup before test\n    setup_directories()\n    create_execution(\"program_uuid\")\n    # Test\n    files = os.listdir(executions_dir)\n    assert len(files) > 0\n    with open(os.path.join(executions_dir, files[0]), \"r\") as file:\n        data = json.load(file)\n        assert \"execution_uuid\" in data",
+        "detail": "tests.test_nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "executions_dir",
+        "kind": 5,
+        "importPath": "tests.test_nadoo_connect",
+        "description": "tests.test_nadoo_connect",
+        "peekOfCode": "executions_dir = (\n    \"executions\"  # Ensure this matches with your main script's directory name\n)\ndef test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio",
+        "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
     {
