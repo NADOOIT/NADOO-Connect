@@ -40,3 +40,20 @@ This project is licensed under the MIT License. For more details, see the LICENS
 (List of contributors and their roles in the project)
 
 For more information and support, please contact <support@nadooit.de>.
+
+## Update 0.1.1
+
+### What's New
+
+- Improved asyncio event loop management in `sender_loop` to enhance performance and prevent unnecessary restarts.
+- Enhanced concurrency control using `portalocker` for managing the sender loop.
+- Added detailed debug print statements in the sender loop for better monitoring and troubleshooting.
+
+### Fixes
+
+- Addressed an issue where the sender loop was not terminating correctly after being idle.
+- Resolved potential concurrency issues with multiple executions and sender loop restarts.
+
+### Known Issues
+
+- There are no known issues as of this update.
