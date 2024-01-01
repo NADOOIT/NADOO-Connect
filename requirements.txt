@@ -2,3 +2,6 @@ python-dotenv
 cryptography
 aiosmtplib
 portalocker
+aiofiles
+async_timeout
+types-aiofiles

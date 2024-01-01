@@ -9,15 +9,6 @@
         "documentation": {}
     },
     {
-        "label": "asyncio",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "asyncio",
-        "description": "asyncio",
-        "detail": "asyncio",
-        "documentation": {}
-    },
-    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -104,6 +95,14 @@
         "documentation": {}
     },
     {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
         "label": "simpledialog",
         "importPath": "tkinter",
         "description": "tkinter",
@@ -117,6 +116,76 @@
         "description": "tkinter",
         "isExtraImport": true,
         "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "aiofiles",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiofiles",
+        "description": "aiofiles",
+        "detail": "aiofiles",
+        "documentation": {}
+    },
+    {
+        "label": "multiprocessing",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "multiprocessing",
+        "description": "multiprocessing",
+        "detail": "multiprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "Process",
+        "importPath": "multiprocessing",
+        "description": "multiprocessing",
+        "isExtraImport": true,
+        "detail": "multiprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "Queue",
+        "importPath": "multiprocessing",
+        "description": "multiprocessing",
+        "isExtraImport": true,
+        "detail": "multiprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "aiofiles.os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiofiles.os",
+        "description": "aiofiles.os",
+        "detail": "aiofiles.os",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
         "documentation": {}
     },
     {
@@ -370,24 +439,6 @@
         "documentation": {}
     },
     {
-        "label": "setup_directories",
-        "kind": 2,
-        "importPath": "nadoo_connect.nadoo_connect",
-        "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)\n    return config\ndef get_config_from_env_or_prompt():\n    required_vars = [",
-        "detail": "nadoo_connect.nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "load_or_request_config",
-        "kind": 2,
-        "importPath": "nadoo_connect.nadoo_connect",
-        "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)\n    return config\ndef get_config_from_env_or_prompt():\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",",
-        "detail": "nadoo_connect.nadoo_connect",
-        "documentation": {}
-    },
-    {
         "label": "get_config_from_env_or_prompt",
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
@@ -410,7 +461,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def save_missing_config_to_env(config):\n    with open(\".env\", \"a\") as env_file:\n        for var, value in config.items():\n            if value is not None:\n                env_file.write(f\"{var}={value}\\n\")\nasync def send_async_email(\n    subject, message, to_email, smtp_server, smtp_port, email, password\n):\n    try:\n        msg = MIMEText(message, _subtype=\"plain\", _charset=\"utf-8\")",
+        "peekOfCode": "def save_missing_config_to_env(config):\n    with open(\".env\", \"a\") as env_file:\n        for var, value in config.items():\n            if value is not None:\n                env_file.write(f\"{var}={value}\\n\")\nasync def send_async_email(\n    subject, message, to_email, smtp_server, smtp_port, email, password\n) -> bool:\n    try:\n        print_all_stack_traces",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -424,11 +475,11 @@
         "documentation": {}
     },
     {
-        "label": "create_execution",
+        "label": "inject_config",
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def create_execution(customer_program_uuid):\n    global config, sender_task\n    if config is None:\n        config = load_or_request_config()\n    setup_directories()\n    execution_data = get_execution_data(customer_program_uuid)\n    save_execution_data(execution_data)\n    start_sender_loop_if_not_running()\ndef get_execution_data(customer_program_uuid):\n    execution_uuid = str(uuid.uuid4())",
+        "peekOfCode": "def inject_config(async_func):\n    async def wrapper(*args, **kwargs):\n        if \"config\" not in kwargs or kwargs[\"config\"] is None:\n            kwargs[\"config\"] = await load_or_request_config()\n        return await async_func(*args, **kwargs)\n    return wrapper\n@inject_config\nasync def create_execution(customer_program_uuid, config=None):\n    await setup_directories_async()\n    execution_data = get_execution_data(customer_program_uuid)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -446,7 +497,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def save_execution_data(execution_data):\n    filepath = os.path.join(executions_dir, f\"{execution_data['execution_uuid']}.json\")\n    with open(filepath, \"w\") as file:\n        json.dump(execution_data, file)\ndef start_sender_loop_if_not_running():\n    global sender_task\n    if sender_task is None or sender_task.done():\n        try:\n            with portalocker.Lock(lockfile_path, mode=\"w\", timeout=1):\n                try:",
+        "peekOfCode": "def save_execution_data(execution_data):\n    filepath = os.path.join(executions_dir, f\"{execution_data['execution_uuid']}.json\")\n    with open(filepath, \"w\") as file:\n        json.dump(execution_data, file)\ndef start_sender_loop_if_not_running(config):\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -455,7 +506,16 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def start_sender_loop_if_not_running():\n    global sender_task\n    if sender_task is None or sender_task.done():\n        try:\n            with portalocker.Lock(lockfile_path, mode=\"w\", timeout=1):\n                try:\n                    loop = asyncio.get_running_loop()\n                except RuntimeError:\n                    # Create a new event loop if there isn't a running one\n                    loop = asyncio.new_event_loop()",
+        "peekOfCode": "def start_sender_loop_if_not_running(config):\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():\n                logger.warning(\"A sender loop process is already running.\")\n                return\n            logger.debug(\"Lock acquired. Starting sender loop process.\")\n            sender_process = Process(target=run_sender_loop_process, args=(config,))",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "run_sender_loop_process",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "def run_sender_loop_process(config):\n    try:\n        logger.debug(\"Process started, reacquiring lock...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Consistent timeout\n            logger.debug(\"Lock reacquired by process. Running sender loop.\")\n            asyncio.run(sender_loop(config))\n    except portalocker.exceptions.LockException:\n        logger.warning(\"Unable to reacquire lock in process, exiting.\")\n    finally:\n        logger.debug(\"Sender loop process ending, releasing lock.\")",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -464,16 +524,43 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\ndef main():\n    global config\n    config = load_or_request_config()\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(100):\n        create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    main()",
+        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(20):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
     {
-        "label": "main",
-        "kind": 2,
+        "label": "logger",
+        "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def main():\n    global config\n    config = load_or_request_config()\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(100):\n        create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    main()",
+        "peekOfCode": "logger = logging.getLogger(__name__)\n# Updated directory names\nstaged_dir = \"rpc_staged\"\nawaiting_response_dir = \"rpc_awaiting_response\"\ndone_dir = \"rpc_done\"\nexecutions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "staged_dir",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "staged_dir = \"rpc_staged\"\nawaiting_response_dir = \"rpc_awaiting_response\"\ndone_dir = \"rpc_done\"\nexecutions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "awaiting_response_dir",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "awaiting_response_dir = \"rpc_awaiting_response\"\ndone_dir = \"rpc_done\"\nexecutions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "done_dir",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "done_dir = \"rpc_done\"\nexecutions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -482,7 +569,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "executions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nconfig = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)",
+        "peekOfCode": "executions_dir = \"executions\"\nlockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -491,16 +578,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "lockfile_path = os.path.join(executions_dir, \"sender.lock\")\nconfig = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():",
-        "detail": "nadoo_connect.nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "config",
-        "kind": 5,
-        "importPath": "nadoo_connect.nadoo_connect",
-        "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "config = None\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()",
+        "peekOfCode": "lockfile_path = os.path.join(executions_dir, \"sender.lock\")\nidle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -509,7 +587,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "idle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()",
+        "peekOfCode": "idle_time = 120  # Idle time in seconds before shutting down the sender loop\nmax_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -518,16 +596,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "max_wait_time = 120  # Maximum wait time in seconds between retries\nsender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)",
-        "detail": "nadoo_connect.nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "sender_task",
-        "kind": 5,
-        "importPath": "nadoo_connect.nadoo_connect",
-        "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "sender_task = None  # Global variable to keep track of the sender task\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)\n    return config",
+        "peekOfCode": "max_wait_time = 120  # Maximum wait time in seconds between retries\nemail_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():\n    load_dotenv()",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -536,7 +605,16 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "email_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\ndef setup_directories():\n    if not os.path.exists(executions_dir):\n        os.makedirs(executions_dir)\ndef load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)\n    return config\ndef get_config_from_env_or_prompt():",
+        "peekOfCode": "email_size_limit = 72 * 1024  # Email size limit in bytes (72 KB)\nsender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()",
+        "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "sender_process",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "peekOfCode": "sender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -545,7 +623,7 @@
         "kind": 2,
         "importPath": "tests.test_nadoo_connect",
         "description": "tests.test_nadoo_connect",
-        "peekOfCode": "def test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio\nasync def test_send_async_email():\n    with patch(\"aiosmtplib.SMTP\", new_callable=AsyncMock) as mock_smtp:\n        result = await send_async_email(",
+        "peekOfCode": "def test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories_async()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio\nasync def test_send_async_email():\n    with patch(\"aiosmtplib.SMTP\", new_callable=AsyncMock) as mock_smtp:\n        result = await send_async_email(",
         "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
@@ -563,7 +641,7 @@
         "kind": 2,
         "importPath": "tests.test_nadoo_connect",
         "description": "tests.test_nadoo_connect",
-        "peekOfCode": "def test_create_execution():\n    # Setup before test\n    setup_directories()\n    create_execution(\"program_uuid\")\n    # Test\n    files = os.listdir(executions_dir)\n    assert len(files) > 0\n    with open(os.path.join(executions_dir, files[0]), \"r\") as file:\n        data = json.load(file)\n        assert \"execution_uuid\" in data",
+        "peekOfCode": "def test_create_execution():\n    # Setup before test\n    setup_directories_async()\n    create_execution(\"program_uuid\")\n    # Test\n    files = os.listdir(executions_dir)\n    assert len(files) > 0\n    with open(os.path.join(executions_dir, files[0]), \"r\") as file:\n        data = json.load(file)\n        assert \"execution_uuid\" in data",
         "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
@@ -572,7 +650,7 @@
         "kind": 5,
         "importPath": "tests.test_nadoo_connect",
         "description": "tests.test_nadoo_connect",
-        "peekOfCode": "executions_dir = (\n    \"executions\"  # Ensure this matches with your main script's directory name\n)\ndef test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio",
+        "peekOfCode": "executions_dir = (\n    \"executions\"  # Ensure this matches with your main script's directory name\n)\n@pytest.mark.asyncio\ndef test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories_async()\n    assert os.path.exists(executions_dir)",
         "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
