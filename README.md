@@ -96,7 +96,8 @@ Various performance optimizations and bug fixes...
 ### Known Issues
 
 There are no known issues as of this update.
-Network Handshaking and Worker Management Diagram
+
+### Network Handshaking and Worker Management Diagram
 
 ```mermaid
 sequenceDiagram
