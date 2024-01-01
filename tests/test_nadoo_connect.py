@@ -14,12 +14,13 @@ executions_dir = (
 )
 
 
+@pytest.mark.asyncio
 def test_setup_directories():
     # Ensure the directory is removed before the test, for a clean state
     if os.path.exists(executions_dir):
         os.rmdir(executions_dir)
 
-    setup_directories()
+    setup_directories_async()
     assert os.path.exists(executions_dir)
 
 
@@ -58,9 +59,10 @@ def test_record_execution_in_db():
     conn.close()
 
 
+@pytest.mark.asyncio
 def test_create_execution():
     # Setup before test
-    setup_directories()
+    setup_directories_async()
     create_execution("program_uuid")
 
     # Test
@@ -75,3 +77,22 @@ def test_create_execution():
     for f in files:
         os.remove(os.path.join(executions_dir, f))
     os.rmdir(executions_dir)
+
+
+@pytest.mark.asyncio
+async def test_get_xyz_for_xyz_remote():
+    # Mock the external dependencies, like network calls or database interactions
+    with patch(
+        "your_module.function_or_class_being_called_by_get_xyz_for_xyz_remote"
+    ) as mock_function:
+        # Configure the mock to return a specific value or raise exceptions if needed
+        mock_function.return_value = "expected_result"
+
+        # Call the function with test data
+        result = await get_xyz_for_xyz_remote("test_uuid", {"sample": "data"})
+
+        # Assert that the result is as expected
+        assert result == "expected_result"
+
+        # Additional assertions can be made here, like checking if the mock was called with expected arguments
+        mock_function.assert_called_with("test_uuid", {"sample": "data"})
