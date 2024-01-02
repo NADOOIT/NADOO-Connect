@@ -116,6 +116,8 @@ sequenceDiagram
 
 ## Update 0.3.0 - Watchdog Integration
 
+![DALL·E 2024-01-02 15 04 05 - A digital artwork representing the concept of real-time file monitoring and processing  The scene includes a stylized computer screen displaying folde](https://github.com/NADOOITChristophBa/NADOO-Connect/assets/106314951/b496dac4-08e1-488f-8056-910a843c3711)
+
 ### What's New in 0.3.0
 
 - **Integrated Watchdog Library**: Implemented the Watchdog library to efficiently monitor changes in specified directories.
