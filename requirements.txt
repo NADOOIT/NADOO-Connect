@@ -5,3 +5,4 @@ portalocker
 aiofiles
 async_timeout
 types-aiofiles
+watchdog
