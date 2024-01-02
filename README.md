@@ -114,3 +114,47 @@ sequenceDiagram
     UserPC->>WorkerPC: Assign and send encrypted task
     WorkerPC->>UserPC: Process task and send encrypted result
 ```
+
+## Update 0.3.0 - Watchdog Integration
+
+### What's New in 0.3.0
+
+- **Integrated Watchdog Library**: Implemented the Watchdog library to efficiently monitor changes in specified directories.
+- **Real-Time File Monitoring**: Enabled real-time monitoring of RPC and execution files for quicker and more efficient processing.
+- **Enhanced Email Handling**: Improved the mechanism for batch processing and sending emails, ensuring more reliable communication.
+- **Streamlined File Processing**: Refined the file processing workflow, resulting in faster and more accurate execution.
+
+### Fixes
+
+- Resolved issues related to concurrent file processing.
+- Fixed bugs in the asynchronous email sending mechanism.
+
+### Known Issues
+
+There are no known issues as of this update.
+
+### File Processing and Watcher Mechanism Diagram
+
+```mermaid
+sequenceDiagram
+    participant Watcher as File Watchers (Watchdog)
+    participant ExecutionDir as Execution Directory
+    participant RPCDir as RPC Directory
+    participant Processor as File Processor
+    participant EmailService as Email Service
+    participant DB as Database
+
+    loop File Monitoring
+        Watcher->>ExecutionDir: Monitor for new files
+        Watcher->>RPCDir: Monitor for new files
+    end
+
+    ExecutionDir->>Watcher: New execution file
+    RPCDir->>Watcher: New RPC file
+
+    loop File Processing
+        Watcher->>Processor: Notify new file
+        Processor->>EmailService: Batch and send emails
+        EmailService->>Processor: Email sent status
+        Processor->>DB: Record execution in database
+    end

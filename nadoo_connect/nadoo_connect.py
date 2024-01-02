@@ -17,6 +17,8 @@ from multiprocessing import Process, Queue
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
+from async_email import send_async_email
+
 # Configure logging to display level, process ID, and message
 logging.basicConfig(
     level=logging.DEBUG,
@@ -90,29 +92,6 @@ def save_missing_config_to_env(config):
                 env_file.write(f"{var}={value}\n")
 
 
-async def send_async_email(
-    subject, message, to_email, smtp_server, smtp_port, email, password
-) -> bool:
-    try:
-        print_all_stack_traces
-
-        msg = MIMEText(message, _subtype="plain", _charset="utf-8")
-        msg["Subject"] = subject
-        msg["From"] = email
-        msg["To"] = to_email
-
-        async with aiosmtplib.SMTP(
-            hostname=smtp_server, port=smtp_port, use_tls=True
-        ) as smtp:
-            await smtp.login(email, password)
-            await smtp.send_message(msg)
-
-        return True
-    except Exception as e:
-        print(f"Error sending email: {e}")
-        return False
-
-
 def record_execution_in_db(execution_uuid, customer_program_uuid, is_sent):
     conn = sqlite3.connect("executions.db")
     cursor = conn.cursor()
@@ -154,7 +133,7 @@ async def create_execution(customer_program_uuid, config=None):
     await setup_directories_async()
     execution_data = get_execution_data(customer_program_uuid)
     await save_execution_data_async(execution_data)
-    start_sender_loop_if_not_running(config)
+    # start_sender_loop_if_not_running(config)
 
 
 async def save_execution_data_async(execution_data):
@@ -235,18 +214,6 @@ def start_sender_loop_if_not_running(config):
             sender_process.start()
     except portalocker.exceptions.LockException:
         logger.warning("Unable to acquire lock, another process may be running.")
-
-
-def run_sender_loop_process(config):
-    try:
-        logger.debug("Process started, reacquiring lock...")
-        with portalocker.Lock(lockfile_path, mode="w", timeout=5):  # Consistent timeout
-            logger.debug("Lock reacquired by process. Running sender loop.")
-            asyncio.run(sender_loop(config))
-    except portalocker.exceptions.LockException:
-        logger.warning("Unable to reacquire lock in process, exiting.")
-    finally:
-        logger.debug("Sender loop process ending, releasing lock.")
 
 
 async def process_rpc_requests(config):
@@ -350,6 +317,18 @@ async def process_execution_requests(execution_files, config):
     return len(batched_execution_data) > 0
 
 
+def run_sender_loop_process(config):
+    try:
+        logger.debug("Process started, reacquiring lock...")
+        with portalocker.Lock(lockfile_path, mode="w", timeout=5):  # Consistent timeout
+            logger.debug("Lock reacquired by process. Running sender loop.")
+            asyncio.run(sender_loop(config))
+    except portalocker.exceptions.LockException:
+        logger.warning("Unable to reacquire lock in process, exiting.")
+    finally:
+        logger.debug("Sender loop process ending, releasing lock.")
+
+
 async def sender_loop(config):
     wait_time = 10  # Shorter wait time for quicker checks
     idle_timeout = 120  # Timeout duration in seconds
@@ -399,7 +378,7 @@ def calculate_size(data):
 
 async def main():
     customer_program_uuid = "specific-uuid-from-database"
-    for i in range(20):
+    for i in range(1000):
         await create_execution(customer_program_uuid)
 
 
