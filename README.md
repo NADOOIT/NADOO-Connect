@@ -160,6 +160,7 @@ sequenceDiagram
         EmailService->>Processor: Email sent status
         Processor->>DB: Record execution in database
     end
+```
 
 ### What's New in 0.3.1
 
