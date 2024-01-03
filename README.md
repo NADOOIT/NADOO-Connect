@@ -214,3 +214,17 @@ This update integrates closely with the NADOO Workspace, allowing it to process 
 ### Fixes 0.3.1
 
 Minor bug fixes and performance improvements in the email retrieval process.
+
+```mermaid
+sequenceDiagram
+    participant UserPC as User PC
+    participant EmailServer as Email Server
+    participant NADOOWorkspace as NADOO Workspace
+    participant ProcessingUnit as Processing Unit
+
+    UserPC->>EmailServer: Send RPC/execution emails
+    EmailServer->>NADOOWorkspace: Store emails
+    NADOOWorkspace->>EmailServer: Retrieve emails for processing
+    EmailServer->>ProcessingUnit: Forward emails to processing unit
+    ProcessingUnit->>NADOOWorkspace: Process and track RPCs/Executions
+```
