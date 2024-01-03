@@ -167,14 +167,14 @@ sequenceDiagram
 - **Email Retrieval for RPC Calls and Execution Tracking**: Enhanced NADOO Connect to include the capability of retrieving emails for remote procedure calls (RPCs) and execution tracking. This feature is particularly useful for NADOO Workspace, the processing side of our company, to handle RPCs and monitor execution status efficiently.
 - **Automated Email Fetching**: Implemented functionality to automatically fetch emails from specified email accounts, facilitating seamless communication and data transfer.
 - **Secured and Restricted Access**: Ensured that user PCs do not have the login credentials to retrieve execution-related emails, maintaining data security and integrity.
-- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_account`, a new function to asynchronously retrieve emails. When the `email_account` parameter is not specified, the function defaults to retrieving emails from the user's account, streamlining the email fetching process.
+- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_address`, a new function to asynchronously retrieve emails. When the `email_account` parameter is not specified, the function defaults to retrieving emails from the user's account, streamlining the email fetching process.
 
 ### Usage
 
-To use `get_emails_for_email_account` in NADOO Connect:
+To use `get_emails_for_email_address` in NADOO Connect:
 
 ```python
-emails = await get_emails_for_email_account(email_account='optional_specific_email_account')
+emails = await get_emails_for_email_address(email_account='optional_specific_email_account')
 ```
 
 This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
@@ -196,14 +196,14 @@ There are no known issues as of this update.
 - **Email Retrieval for RPC Calls and Execution Tracking**: Enhanced NADOO Connect to include the capability of retrieving emails for remote procedure calls (RPCs) and execution tracking. This feature is particularly useful for NADOO Workspace, the processing side of our company, to handle RPCs and monitor execution status efficiently.
 - **Automated Email Fetching**: Implemented functionality to automatically fetch emails from specified email accounts, facilitating seamless communication and data transfer.
 - **Secured and Restricted Access**: Ensured that user PCs do not have the login credentials to retrieve execution-related emails, maintaining data security and integrity.
-- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_account`, a new function to asynchronously retrieve emails. When the `email_account` parameter is not specified, the function defaults to retrieving emails from the user's account, streamlining the email fetching process.
+- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_address`, a new function to asynchronously retrieve emails. When the `email_account` parameter is not specified, the function defaults to retrieving emails from the user's account, streamlining the email fetching process.
 
 ### Usage
 
-To use `get_emails_for_email_account` in NADOO Connect:
+To use `get_emails_for_email_address` in NADOO Connect:
 
 ```python
-emails = await get_emails_for_email_account(email_account='optional_specific_email_account')
+emails = await get_emails_for_email_address(email_account='optional_specific_email_address e.G. christoph.backhaus@nadooit.de')
 ```
 
 This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
