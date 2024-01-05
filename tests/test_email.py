@@ -14,6 +14,24 @@ from nadoo_connect.email import (
 
 import aiosqlite
 import pytest
+import pytest
+import glob
+import os
+
+
+@pytest.fixture(scope="session", autouse=True)
+def cleanup_specific_files_after_tests():
+    # Setup code (runs before any tests)
+    yield
+
+    # Cleanup code (runs after all tests)
+    pattern = "<async_generator object setup_database_for_testing at *"  # Define your file naming pattern
+    for filename in glob.glob(pattern):
+        try:
+            os.remove(filename)
+            print(f"Deleted file: {filename}")
+        except OSError as e:
+            print(f"Error deleting file {filename}: {e}")
 
 
 @pytest.fixture(scope="module")
