@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 import logging
 
-from async_email import send_async_email
+from nadoo_connect.email import send_email
 from nadoo_connect import record_execution_in_db, load_or_request_config
 
 # Define directories
@@ -85,7 +85,7 @@ async def process_execution_files(config, batch_size_limit=2000):
 
     if batched_execution_data:
         email_content = json.dumps(batched_execution_data)
-        email_sent = await send_async_email(
+        email_sent = await send_email(
             "Batched Executions",
             email_content,
             config["DESTINATION_EMAIL"],
