@@ -12,7 +12,7 @@ NADOO Connect is an innovative solution that enables customers to send automated
 
 ## How It Works
 
-NADOO Connect uses email as the primary communication channel to securely and efficiently transfer data and commands. Customer PCs send encrypted messages, which are received and processed by our system.
+NADOO Connect currently uses email as the primary communication channel. Customer PCs send messages, which are received and processed by our system. Note: Traffic encryption will be implemented in a future update for enhanced security.
 
 ### Workflow Diagram
 
@@ -22,7 +22,7 @@ sequenceDiagram
     participant EmailServer as Email Server
     participant ProcessingServer as Processing Server
 
-    CustomerPC->>EmailServer: Send encrypted message
+    CustomerPC->>EmailServer: Send message
     EmailServer->>ProcessingServer: Forward message
     ProcessingServer->>ProcessingServer: Process message and respond if necessary
 ```
@@ -30,6 +30,10 @@ sequenceDiagram
 ## Installation and Usage
 
 (Detailed instructions for installation and usage of the software)
+
+## Authentication
+
+Authentication is currently based on the user's email credentials (email address and password). Future updates will include more robust authentication mechanisms.
 
 ### Using `create_execution`
 
@@ -68,52 +72,6 @@ For more information and support, please contact <support@nadooit.de>.
 Improved asyncio event loop management in sender_loop...
 Enhanced concurrency control using portalocker...
 Added detailed debug print statements...
-
-### Fixes
-
-Addressed an issue where the sender loop was not terminating...
-Resolved potential concurrency issues...
-
-### Known Issues
-
-There are no known issues as of this update.
-
-## Update 0.2.0 - Feature Update
-
-### What's New in 0.2.0
-
-Ledger System Implementation: Introduced a ledger system...
-Dynamic Synchronization of Work and User PCs: Implemented a publish-subscribe model...
-Enhanced Encryption Mechanisms: Enhanced the security...
-Efficient Task Assignment and Processing: Streamlined the process...
-Automated Ledger Updates and Synchronization: Automated the process...
-Security and Authentication Enhancements: Introduced robust authentication mechanisms...
-
-### Fixes
-
-Various performance optimizations and bug fixes...
-
-### Known Issues
-
-There are no known issues as of this update.
-
-### Network Handshaking and Worker Management Diagram
-
-```mermaid
-sequenceDiagram
-    participant UserPC as User PC
-    participant PublisherPC as Publisher PC
-    participant WorkerPC as Worker PC
-    participant EmailServer as Email Server
-
-    UserPC->>PublisherPC: Request network ledger
-    PublisherPC->>UserPC: Send network ledger
-    UserPC->>EmailServer: Announce presence to network
-    EmailServer->>WorkerPC: Forward user announcement
-    WorkerPC->>UserPC: Send availability and public key
-    UserPC->>WorkerPC: Assign and send encrypted task
-    WorkerPC->>UserPC: Process task and send encrypted result
-```
 
 ## Update 0.3.0 - Watchdog Integration
 
@@ -162,27 +120,6 @@ sequenceDiagram
     end
 ```
 
-### What's New in 0.3.1
-
-- **Email Retrieval for RPC Calls and Execution Tracking**: Enhanced NADOO Connect to include the capability of retrieving emails for remote procedure calls (RPCs) and execution tracking. This feature is particularly useful for NADOO Workspace, the processing side of our company, to handle RPCs and monitor execution status efficiently.
-- **Automated Email Fetching**: Implemented functionality to automatically fetch emails from specified email accounts, facilitating seamless communication and data transfer.
-- **Secured and Restricted Access**: Ensured that user PCs do not have the login credentials to retrieve execution-related emails, maintaining data security and integrity.
-- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_address`, a new function to asynchronously retrieve emails. When the `email_account` parameter is not specified, the function defaults to retrieving emails from the user's account, streamlining the email fetching process.
-
-### Usage
-
-To use `get_emails_for_email_address` in NADOO Connect:
-
-```python
-emails = await get_emails_for_email_address(email_account='optional_specific_email_account')
-```
-
-This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
-
-### Workflow Integration
-
-This update integrates closely with the NADOO Workspace, allowing it to process the RPCs and track executions for billing and operational purposes.
-
 ### Fixes
 
 Minor bug fixes and performance improvements in the email retrieval process.
@@ -191,30 +128,23 @@ Minor bug fixes and performance improvements in the email retrieval process.
 
 There are no known issues as of this update.
 
-### What's New in 0.3.1
+## ToDo
 
-- **Email Retrieval for RPC Calls and Execution Tracking**: Enhanced NADOO Connect to include the capability of retrieving emails for remote procedure calls (RPCs) and execution tracking. This feature is particularly useful for NADOO Workspace, the processing side of our company, to handle RPCs and monitor execution status efficiently.
-- **Automated Email Fetching**: Implemented functionality to automatically fetch emails from specified email accounts, facilitating seamless communication and data transfer.
-- **Secured and Restricted Access**: Ensured that user PCs do not have the login credentials to retrieve execution-related emails, maintaining data security and integrity.
-- **Asynchronous Email Retrieval Function**: Introduced `get_emails_for_email_address`, a new function to asynchronously retrieve emails. When the `email_adress` parameter is not specified, the function defaults to retrieving emails from the user's address, streamlining the email fetching process.
+```mermaid
+sequenceDiagram
+    participant UserPC as User PC
+    participant PublisherPC as Publisher PC
+    participant WorkerPC as Worker PC
+    participant EmailServer as Email Server
 
-### Usage
-
-To use `get_emails_for_email_address` in NADOO Connect:
-
-```python
-emails = await get_emails_for_email_address(email_adress='optional_specific_email_address e.G. christoph.backhaus@nadooit.de')
+    UserPC->>PublisherPC: Request network ledger
+    PublisherPC->>UserPC: Send network ledger
+    UserPC->>EmailServer: Announce presence to network
+    EmailServer->>WorkerPC: Forward user announcement
+    WorkerPC->>UserPC: Send availability and public key
+    UserPC->>WorkerPC: Assign and send encrypted task
+    WorkerPC->>UserPC: Process task and send encrypted result
 ```
-
-This function asynchronously retrieves emails from the specified email address. If the email_adress parameter is not provided, it defaults to the user's email address set in the configuration.
-
-### Workflow Integration 0.3.1
-
-This update integrates closely with the NADOO Workspace, allowing it to process the RPCs and track executions for billing and operational purposes.
-
-### Fixes 0.3.1
-
-Minor bug fixes and performance improvements in the email retrieval process.
 
 ```mermaid
 sequenceDiagram
@@ -229,3 +159,11 @@ sequenceDiagram
     EmailServer->>ProcessingUnit: Forward emails to processing unit
     ProcessingUnit->>NADOOWorkspace: Process and track RPCs/Executions
 ```
+
+To use `get_emails_for_email_address` in NADOO Connect:
+
+```python
+emails = await get_emails_for_email_address(email_account='optional_specific_email_account')
+```
+
+This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
