@@ -17,7 +17,7 @@ from multiprocessing import Process, Queue
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
-from async_email import send_async_email
+from nadoo_connect.email import send_email
 
 # Configure logging to display level, process ID, and message
 logging.basicConfig(
@@ -133,13 +133,16 @@ async def create_execution(customer_program_uuid, config=None):
     await setup_directories_async()
     execution_data = get_execution_data(customer_program_uuid)
     await save_execution_data_async(execution_data)
-    # start_sender_loop_if_not_running(config)
+    start_sender_loop_if_not_running(config)
 
 
 async def save_execution_data_async(execution_data):
-    filepath = os.path.join(executions_dir, f"{execution_data['execution_uuid']}.json")
-    async with aiofiles.open(filepath, "w") as file:
-        await file.write(json.dumps(execution_data))
+    file_path = os.path.join(executions_dir, f"{execution_data['execution_uuid']}.json")
+    try:
+        async with aiofiles.open(file_path, "w") as file:
+            await file.write(json.dumps(execution_data))
+    except Exception as e:
+        print(f"Error saving execution data: {e}")
 
 
 async def get_xyz_for_xyz_remote(uuid, data, config):
@@ -162,7 +165,7 @@ async def get_xyz_for_xyz_remote(uuid, data, config):
     to_email = config["DESTINATION_EMAIL"]
 
     # Send the request via email
-    email_sent = await send_async_email(
+    email_sent = await send_email(
         subject="RPC Request",
         message=request_body,
         to_email=to_email,
@@ -256,7 +259,7 @@ async def process_rpc_requests(config):
     # Process the batched RPC requests
     if batched_rpc_data:
         email_content = json.dumps(batched_rpc_data)
-        email_sent = await send_async_email(
+        email_sent = await send_email(
             "Batched RPC Requests",
             email_content,
             config["DESTINATION_EMAIL"],
@@ -294,7 +297,7 @@ async def process_execution_requests(execution_files, config):
     logger.debug("Processing batched execution requests")
     if batched_execution_data:
         email_content = json.dumps(batched_execution_data)
-        email_sent = await send_async_email(
+        email_sent = await send_email(
             "Batched Executions",
             email_content,
             config["DESTINATION_EMAIL"],

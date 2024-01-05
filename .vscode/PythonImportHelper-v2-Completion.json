@@ -1,5 +1,23 @@
 [
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "aiosmtplib",
         "kind": 6,
         "isExtraImport": true,
@@ -25,29 +43,89 @@
         "documentation": {}
     },
     {
-        "label": "MIMEText",
-        "importPath": "email.mime.text",
-        "description": "email.mime.text",
+        "label": "logging",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "email.mime.text",
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
         "documentation": {}
     },
     {
-        "label": "os",
+        "label": "traceback",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
         "documentation": {}
     },
     {
-        "label": "json",
+        "label": "sys",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "aiosqlite",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiosqlite",
+        "description": "aiosqlite",
+        "detail": "aiosqlite",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "simpledialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "simpledialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Tk",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
         "documentation": {}
     },
     {
@@ -118,28 +196,67 @@
         "documentation": {}
     },
     {
-        "label": "logging",
-        "kind": 6,
+        "label": "send_email",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
         "isExtraImport": true,
-        "importPath": "logging",
-        "description": "logging",
-        "detail": "logging",
+        "detail": "nadoo_connect.email",
         "documentation": {}
     },
     {
-        "label": "send_async_email",
-        "importPath": "async_email",
-        "description": "async_email",
+        "label": "send_email",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
         "isExtraImport": true,
-        "detail": "async_email",
+        "detail": "nadoo_connect.email",
         "documentation": {}
     },
     {
-        "label": "send_async_email",
-        "importPath": "async_email",
-        "description": "async_email",
+        "label": "get_default_email_account",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
         "isExtraImport": true,
-        "detail": "async_email",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_account_for_email_address",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "get_emails_for_email_address",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_email",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "send_email",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "set_email_account_details_for_email_address",
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.email",
         "documentation": {}
     },
     {
@@ -202,22 +319,6 @@
         "documentation": {}
     },
     {
-        "label": "simpledialog",
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "isExtraImport": true,
-        "detail": "tkinter",
-        "documentation": {}
-    },
-    {
-        "label": "Tk",
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "isExtraImport": true,
-        "detail": "tkinter",
-        "documentation": {}
-    },
-    {
         "label": "aiofiles",
         "kind": 6,
         "isExtraImport": true,
@@ -261,15 +362,6 @@
         "documentation": {}
     },
     {
-        "label": "traceback",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "traceback",
-        "description": "traceback",
-        "detail": "traceback",
-        "documentation": {}
-    },
-    {
         "label": "pytest",
         "kind": 6,
         "isExtraImport": true,
@@ -292,6 +384,57 @@
         "description": "unittest.mock",
         "isExtraImport": true,
         "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "MagicMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncMock",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "patch",
+        "importPath": "unittest.mock",
+        "description": "unittest.mock",
+        "isExtraImport": true,
+        "detail": "unittest.mock",
+        "documentation": {}
+    },
+    {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
         "documentation": {}
     },
     {
@@ -509,6 +652,69 @@
         "description": "setuptools",
         "isExtraImport": true,
         "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "log_errors",
+        "kind": 2,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "def log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)\n        except Exception as e:\n            log_exception(func, args, kwargs, e)\n            raise\n    return async_wrapper\ndef log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "log_exception",
+        "kind": 2,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "def log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(\n        [repr(a) for a in args] + [f\"{k}={v!r}\" for k, v in kwargs.items()]\n    )\n    env_vars = {k: v for k, v in os.environ.items()}\n    error_logger.error(\n        f\"Exception in {func.__name__} with args [{arg_values}] and env vars [{env_vars}]: {e}\\n{traceback.format_exc()}\"\n    )\n# Async function to setup database\n@log_errors",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_credentials_db_name",
+        "kind": 2,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "def get_email_credentials_db_name() -> str:\n    return \"email_credentials.db\"\ndef email_credentials_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_credentials_db_name\" not in kwargs:\n            kwargs[\"email_credentials_db_name\"] = get_email_credentials_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to set default email address\n@log_errors",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "email_credentials_db_name",
+        "kind": 2,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "def email_credentials_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_credentials_db_name\" not in kwargs:\n            kwargs[\"email_credentials_db_name\"] = get_email_credentials_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to set default email address\n@log_errors\n@email_credentials_db_name\nasync def set_default_email_address(email_address: str, email_credentials_db_name: str):",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_email",
+        "kind": 2,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "def is_valid_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    return re.match(pattern, email) is not None\n# Function to request email account details from user (Sync due to GUI operation)\nasync def get_email_account_details_from_user(email_address):\n    root = tk.Tk()\n    root.withdraw()  # Hide the main window\n    email_account_details = {}\n    # TODO #5 pull all already exisiting info for the given email_address\n    email_account_details[\"smtp_server\"] = simpledialog.askstring(",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "error_logger",
+        "kind": 5,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "error_logger = logging.getLogger(\"error_logger\")\nerror_logger.setLevel(logging.ERROR)\nerror_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):",
+        "detail": "nadoo_connect.email",
+        "documentation": {}
+    },
+    {
+        "label": "error_handler",
+        "kind": 5,
+        "importPath": "nadoo_connect.email",
+        "description": "nadoo_connect.email",
+        "peekOfCode": "error_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)",
+        "detail": "nadoo_connect.email",
         "documentation": {}
     },
     {
@@ -791,11 +997,29 @@
         "documentation": {}
     },
     {
-        "label": "test_setup_directories",
+        "label": "cleanup_specific_files_after_tests",
         "kind": 2,
+        "importPath": "tests.test_email",
+        "description": "tests.test_email",
+        "peekOfCode": "def cleanup_specific_files_after_tests():\n    # Setup code (runs before any tests)\n    yield\n    # Cleanup code (runs after all tests)\n    pattern = \"<async_generator object setup_database_for_testing at *\"  # Define your file naming pattern\n    for filename in glob.glob(pattern):\n        try:\n            os.remove(filename)\n            print(f\"Deleted file: {filename}\")\n        except OSError as e:",
+        "detail": "tests.test_email",
+        "documentation": {}
+    },
+    {
+        "label": "test_is_valid_email",
+        "kind": 2,
+        "importPath": "tests.test_email",
+        "description": "tests.test_email",
+        "peekOfCode": "def test_is_valid_email():\n    assert is_valid_email(\"test@example.com\") == True\n    assert is_valid_email(\"invalidemail\") == False\n@pytest.mark.asyncio\nasync def test_get_default_email_account(setup_database_for_testing):\n    test_db_name = setup_database_for_testing\n    # Your test code using test_db_name\n    # Set up an in-memory SQLite database\n    async with aiosqlite.connect(test_db_name) as conn:\n        # Create the email_accounts table and insert test data",
+        "detail": "tests.test_email",
+        "documentation": {}
+    },
+    {
+        "label": "MockSMTP",
+        "kind": 6,
         "importPath": "tests.test_nadoo_connect",
         "description": "tests.test_nadoo_connect",
-        "peekOfCode": "def test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories_async()\n    assert os.path.exists(executions_dir)\n@pytest.mark.asyncio\nasync def test_send_async_email():\n    with patch(\"aiosmtplib.SMTP\", new_callable=AsyncMock) as mock_smtp:\n        result = await send_async_email(",
+        "peekOfCode": "class MockSMTP:\n    def __init__(self, *args, **kwargs):\n        pass\n    async def __aenter__(self):\n        return self\n    async def __aexit__(self, exc_type, exc_value, traceback):\n        pass\n    async def login(self, *args, **kwargs):\n        pass\n    async def send_message(self, *args, **kwargs):",
         "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
@@ -805,24 +1029,6 @@
         "importPath": "tests.test_nadoo_connect",
         "description": "tests.test_nadoo_connect",
         "peekOfCode": "def test_record_execution_in_db():\n    # Optionally, use an in-memory database for testing\n    # conn = sqlite3.connect(\":memory:\")\n    # cursor = conn.cursor()\n    # Replace the connection line in the record_execution_in_db function with\n    # cursor.execute(\"...\") and pass the cursor instead of opening a new connection.\n    record_execution_in_db(\"uuid\", \"program_uuid\", True)\n    conn = sqlite3.connect(\n        \"executions.db\"\n    )  # Consider using an in-memory database for testing",
-        "detail": "tests.test_nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "test_create_execution",
-        "kind": 2,
-        "importPath": "tests.test_nadoo_connect",
-        "description": "tests.test_nadoo_connect",
-        "peekOfCode": "def test_create_execution():\n    # Setup before test\n    setup_directories_async()\n    create_execution(\"program_uuid\")\n    # Test\n    files = os.listdir(executions_dir)\n    assert len(files) > 0\n    with open(os.path.join(executions_dir, files[0]), \"r\") as file:\n        data = json.load(file)\n        assert \"execution_uuid\" in data",
-        "detail": "tests.test_nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "executions_dir",
-        "kind": 5,
-        "importPath": "tests.test_nadoo_connect",
-        "description": "tests.test_nadoo_connect",
-        "peekOfCode": "executions_dir = (\n    \"executions\"  # Ensure this matches with your main script's directory name\n)\n@pytest.mark.asyncio\ndef test_setup_directories():\n    # Ensure the directory is removed before the test, for a clean state\n    if os.path.exists(executions_dir):\n        os.rmdir(executions_dir)\n    setup_directories_async()\n    assert os.path.exists(executions_dir)",
         "detail": "tests.test_nadoo_connect",
         "documentation": {}
     },
