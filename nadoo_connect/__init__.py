@@ -1,3 +1,3 @@
 from .nadoo_connect import *
-from .async_email import *
-from file_watcher_processor import *
+from .email import *
+from .file_watcher_processor import *
