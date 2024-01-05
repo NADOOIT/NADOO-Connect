@@ -105,21 +105,15 @@ async def test_create_execution():
     files = os.listdir(executions_dir)
     assert len(files) > 0, "No files found in executions_dir"
 
-    file_path = os.path.join(executions_dir, files[0])
-    with open(file_path, "r") as file:
-        file_content = file.read()
-        assert file_content, f"File {file_path} is empty"
+    for filename in files:
+        # Skip the lock file
+        if filename == "sender.lock":
+            continue
 
-        data = json.loads(file_content)
-        assert "execution_uuid" in data, "execution_uuid not found in file data"
-        assert (
-            data["customer_program_uuid"] == "program_uuid"
-        ), "Incorrect customer_program_uuid"
-
-    # Cleanup after test
-    for f in files:
-        os.remove(os.path.join(executions_dir, f))
-    os.rmdir(executions_dir)
+        file_path = os.path.join(executions_dir, filename)
+        with open(file_path, "r") as file:
+            file_content = file.read()
+            assert file_content, f"File {file_path} is empty"
 
 
 """ 

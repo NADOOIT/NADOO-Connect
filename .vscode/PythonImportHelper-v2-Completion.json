@@ -411,6 +411,15 @@
         "documentation": {}
     },
     {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -985,6 +994,15 @@
         "description": "nadoo_connect.nadoo_connect",
         "peekOfCode": "sender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)",
         "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "cleanup_specific_files_after_tests",
+        "kind": 2,
+        "importPath": "tests.test_email",
+        "description": "tests.test_email",
+        "peekOfCode": "def cleanup_specific_files_after_tests():\n    # Setup code (runs before any tests)\n    yield\n    # Cleanup code (runs after all tests)\n    pattern = \"<async_generator object setup_database_for_testing at *\"  # Define your file naming pattern\n    for filename in glob.glob(pattern):\n        try:\n            os.remove(filename)\n            print(f\"Deleted file: {filename}\")\n        except OSError as e:",
+        "detail": "tests.test_email",
         "documentation": {}
     },
     {
