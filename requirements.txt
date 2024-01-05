@@ -6,3 +6,6 @@ aiofiles
 async_timeout
 types-aiofiles
 watchdog
+pytest-asyncio
+aiosqlite
+mypy
