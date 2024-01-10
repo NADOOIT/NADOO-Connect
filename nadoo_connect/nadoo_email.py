@@ -10,10 +10,15 @@ import aiosqlite
 import tkinter as tk
 from tkinter import simpledialog
 
+# Create 'logs' directory if it doesn't exist
+logs_dir = "logs"
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
+
 # Setup a dedicated error logger
 error_logger = logging.getLogger("error_logger")
 error_logger.setLevel(logging.ERROR)
-error_handler = logging.FileHandler("error_logs.log")
+error_handler = logging.FileHandler(os.path.join(logs_dir, "error_logs.log"))
 error_handler.setFormatter(
     logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 )
@@ -45,6 +50,11 @@ def log_exception(func, args, kwargs, e):
 def get_execution_email_address():
     # Hardcoded email address
     return "executions@nadooit.de"
+
+
+def get_rpc_email_address():
+    # Hardcoded email address
+    return "rpc@nadooit.de"
 
 
 def get_email_account_db_name() -> str:
@@ -153,6 +163,23 @@ async def set_default_email_address(email_address: str, email_account_db_name: s
 @email_account_db_name
 async def get_default_email_account(email_account_db_name: str):
     async with aiosqlite.connect(email_account_db_name) as conn:
+        # Check if the 'email_accounts' table exists and create it if not
+        await conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS email_accounts (
+                email TEXT PRIMARY KEY,
+                pop_server TEXT,
+                pop_port INTEGER,
+                smtp_server TEXT,
+                smtp_port INTEGER,
+                password TEXT,
+                is_default BOOLEAN DEFAULT 0
+            );
+            """
+        )
+        await conn.commit()
+
+        # Now perform the query
         cursor = await conn.execute("SELECT * FROM email_accounts WHERE is_default = 1")
         result = await cursor.fetchone()
         await cursor.close()
@@ -244,10 +271,10 @@ def is_valid_email(email):
 
 
 # Function to request missing email account details from user
-async def get_email_account_from_user(email_address, existing_details):
+async def get_email_account_from_user(email_account):
     root = tk.Tk()
     root.withdraw()  # Hide the main window
-    email_account = existing_details.copy()  # Start with existing details
+    email_account = email_account.copy()  # Start with existing details
 
     # Check and ask for missing POP server
     if not check_pop_server_in_email_account(email_account):
@@ -309,7 +336,7 @@ async def get_emails_for_email_address(email_address, email_account_db_name: str
         and check_pop_port_in_email_account(email_account)
         and check_password_in_email_account(email_account)
     ):
-        email_account = await get_email_account_from_user(email_address, email_account)
+        email_account = await get_email_account_from_user(email_account)
 
     # Retrieve emails using the provided details
     emails = []
