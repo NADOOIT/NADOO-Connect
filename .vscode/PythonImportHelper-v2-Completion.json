@@ -1,14 +1,5 @@
 [
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -18,114 +9,12 @@
         "documentation": {}
     },
     {
-        "label": "aiosmtplib",
+        "label": "json",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "aiosmtplib",
-        "description": "aiosmtplib",
-        "detail": "aiosmtplib",
-        "documentation": {}
-    },
-    {
-        "label": "MIMEText",
-        "importPath": "email.mime.text",
-        "description": "email.mime.text",
-        "isExtraImport": true,
-        "detail": "email.mime.text",
-        "documentation": {}
-    },
-    {
-        "label": "MIMEText",
-        "importPath": "email.mime.text",
-        "description": "email.mime.text",
-        "isExtraImport": true,
-        "detail": "email.mime.text",
-        "documentation": {}
-    },
-    {
-        "label": "logging",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "logging",
-        "description": "logging",
-        "detail": "logging",
-        "documentation": {}
-    },
-    {
-        "label": "traceback",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "traceback",
-        "description": "traceback",
-        "detail": "traceback",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
-        "documentation": {}
-    },
-    {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "aiosqlite",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "aiosqlite",
-        "description": "aiosqlite",
-        "detail": "aiosqlite",
-        "documentation": {}
-    },
-    {
-        "label": "tkinter",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "detail": "tkinter",
-        "documentation": {}
-    },
-    {
-        "label": "simpledialog",
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "isExtraImport": true,
-        "detail": "tkinter",
-        "documentation": {}
-    },
-    {
-        "label": "simpledialog",
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "isExtraImport": true,
-        "detail": "tkinter",
-        "documentation": {}
-    },
-    {
-        "label": "Tk",
-        "importPath": "tkinter",
-        "description": "tkinter",
-        "isExtraImport": true,
-        "detail": "tkinter",
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -196,67 +85,28 @@
         "documentation": {}
     },
     {
-        "label": "send_email",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
+        "label": "logging",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "nadoo_connect.email",
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
         "documentation": {}
     },
     {
         "label": "send_email",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
         "isExtraImport": true,
-        "detail": "nadoo_connect.email",
+        "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
     {
-        "label": "get_default_email_account",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
+        "label": "*",
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
         "isExtraImport": true,
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "get_email_account_for_email_address",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "get_emails_for_email_address",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "is_valid_email",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "send_email",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "set_email_account_details_for_email_address",
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.email",
+        "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
     {
@@ -319,6 +169,39 @@
         "documentation": {}
     },
     {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "simpledialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Tk",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "simpledialog",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
         "label": "aiofiles",
         "kind": 6,
         "isExtraImport": true,
@@ -328,24 +211,7 @@
         "documentation": {}
     },
     {
-        "label": "multiprocessing",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "multiprocessing",
-        "description": "multiprocessing",
-        "detail": "multiprocessing",
-        "documentation": {}
-    },
-    {
         "label": "Process",
-        "importPath": "multiprocessing",
-        "description": "multiprocessing",
-        "isExtraImport": true,
-        "detail": "multiprocessing",
-        "documentation": {}
-    },
-    {
-        "label": "Queue",
         "importPath": "multiprocessing",
         "description": "multiprocessing",
         "isExtraImport": true,
@@ -359,6 +225,66 @@
         "importPath": "aiofiles.os",
         "description": "aiofiles.os",
         "detail": "aiofiles.os",
+        "documentation": {}
+    },
+    {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "nadoo_email",
+        "description": "nadoo_email",
+        "isExtraImport": true,
+        "detail": "nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "aiosmtplib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiosmtplib",
+        "description": "aiosmtplib",
+        "detail": "aiosmtplib",
+        "documentation": {}
+    },
+    {
+        "label": "MIMEText",
+        "importPath": "email.mime.text",
+        "description": "email.mime.text",
+        "isExtraImport": true,
+        "detail": "email.mime.text",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "aiosqlite",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "aiosqlite",
+        "description": "aiosqlite",
+        "detail": "aiosqlite",
         "documentation": {}
     },
     {
@@ -655,69 +581,6 @@
         "documentation": {}
     },
     {
-        "label": "log_errors",
-        "kind": 2,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "def log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)\n        except Exception as e:\n            log_exception(func, args, kwargs, e)\n            raise\n    return async_wrapper\ndef log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "log_exception",
-        "kind": 2,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "def log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(\n        [repr(a) for a in args] + [f\"{k}={v!r}\" for k, v in kwargs.items()]\n    )\n    env_vars = {k: v for k, v in os.environ.items()}\n    error_logger.error(\n        f\"Exception in {func.__name__} with args [{arg_values}] and env vars [{env_vars}]: {e}\\n{traceback.format_exc()}\"\n    )\n# Async function to setup database\n@log_errors",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "get_email_credentials_db_name",
-        "kind": 2,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "def get_email_credentials_db_name() -> str:\n    return \"email_credentials.db\"\ndef email_credentials_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_credentials_db_name\" not in kwargs:\n            kwargs[\"email_credentials_db_name\"] = get_email_credentials_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to set default email address\n@log_errors",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "email_credentials_db_name",
-        "kind": 2,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "def email_credentials_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_credentials_db_name\" not in kwargs:\n            kwargs[\"email_credentials_db_name\"] = get_email_credentials_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to set default email address\n@log_errors\n@email_credentials_db_name\nasync def set_default_email_address(email_address: str, email_credentials_db_name: str):",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "is_valid_email",
-        "kind": 2,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "def is_valid_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    return re.match(pattern, email) is not None\n# Function to request email account details from user (Sync due to GUI operation)\nasync def get_email_account_details_from_user(email_address):\n    root = tk.Tk()\n    root.withdraw()  # Hide the main window\n    email_account_details = {}\n    # TODO #5 pull all already exisiting info for the given email_address\n    email_account_details[\"smtp_server\"] = simpledialog.askstring(",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "error_logger",
-        "kind": 5,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "error_logger = logging.getLogger(\"error_logger\")\nerror_logger.setLevel(logging.ERROR)\nerror_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
-        "label": "error_handler",
-        "kind": 5,
-        "importPath": "nadoo_connect.email",
-        "description": "nadoo_connect.email",
-        "peekOfCode": "error_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)",
-        "detail": "nadoo_connect.email",
-        "documentation": {}
-    },
-    {
         "label": "RPCEventHandler",
         "kind": 6,
         "importPath": "nadoo_connect.file_watcher_processor",
@@ -821,7 +684,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def get_config_from_env_or_prompt():\n    required_vars = [\n        \"SMTP_SERVER\",\n        \"SMTP_PORT\",\n        \"EMAIL\",\n        \"PASSWORD\",\n        \"DESTINATION_EMAIL\",\n    ]\n    config = {var: os.getenv(var) for var in required_vars}\n    missing_configs = {var for var in required_vars if not config[var]}",
+        "peekOfCode": "def get_config_from_env_or_prompt():\n    required_vars = []  # Empty list for now\n    config = {var: os.getenv(var) for var in required_vars}\n    missing_configs = {var for var in required_vars if not config[var]}\n    if missing_configs:\n        config.update(request_missing_config(missing_configs))\n    return config\ndef request_missing_config(missing_configs):\n    root = Tk()\n    root.withdraw()",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -839,7 +702,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def save_missing_config_to_env(config):\n    with open(\".env\", \"a\") as env_file:\n        for var, value in config.items():\n            if value is not None:\n                env_file.write(f\"{var}={value}\\n\")\ndef record_execution_in_db(execution_uuid, customer_program_uuid, is_sent):\n    conn = sqlite3.connect(\"executions.db\")\n    cursor = conn.cursor()\n    cursor.execute(\n        \"\"\"CREATE TABLE IF NOT EXISTS execution_records ",
+        "peekOfCode": "def save_missing_config_to_env(config):\n    existing_config = {}\n    if os.path.exists(\".env\"):\n        with open(\".env\", \"r\") as env_file:\n            for line in env_file:\n                var, value = line.strip().split(\"=\", 1)\n                existing_config[var] = value\n    with open(\".env\", \"a\") as env_file:\n        for var, value in config.items():\n            if var not in existing_config or existing_config[var] != value:",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -857,7 +720,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def inject_config(async_func):\n    async def wrapper(*args, **kwargs):\n        if \"config\" not in kwargs or kwargs[\"config\"] is None:\n            kwargs[\"config\"] = await load_or_request_config()\n        return await async_func(*args, **kwargs)\n    return wrapper\n@inject_config\nasync def create_execution(customer_program_uuid, config=None):\n    await setup_directories_async()\n    execution_data = get_execution_data(customer_program_uuid)",
+        "peekOfCode": "def inject_config(async_func):\n    async def wrapper(*args, **kwargs):\n        if \"config\" not in kwargs or kwargs[\"config\"] is None:\n            kwargs[\"config\"] = await load_or_request_config()\n        return await async_func(*args, **kwargs)\n    return wrapper\n# TODO #7 remove config\n@inject_config\nasync def create_execution(customer_program_uuid, config=None):\n    await setup_directories_async()",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -902,7 +765,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(1000):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
+        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(10):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -994,6 +857,177 @@
         "description": "nadoo_connect.nadoo_connect",
         "peekOfCode": "sender_process = None  # To keep track of the sender process\nasync def print_all_stack_traces():\n    for task in asyncio.all_tasks():\n        task.print_stack()\n# Call this function at points where you want to inspect the state of all tasks\n# Remaining functions (load_or_request_config and get_config_from_env_or_prompt) will stay the same\nasync def load_or_request_config():\n    load_dotenv()\n    config = get_config_from_env_or_prompt()\n    save_missing_config_to_env(config)",
         "detail": "nadoo_connect.nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "log_errors",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)\n        except Exception as e:\n            log_exception(func, args, kwargs, e)\n            raise\n    return async_wrapper\ndef log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "log_exception",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(\n        [repr(a) for a in args] + [f\"{k}={v!r}\" for k, v in kwargs.items()]\n    )\n    env_vars = {k: v for k, v in os.environ.items()}\n    error_logger.error(\n        f\"Exception in {func.__name__} with args [{arg_values}] and env vars [{env_vars}]: {e}\\n{traceback.format_exc()}\"\n    )\ndef get_execution_email_address():\n    # Hardcoded email address",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_execution_email_address",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_execution_email_address():\n    # Hardcoded email address\n    return \"executions@nadooit.de\"\ndef get_email_account_db_name() -> str:\n    return \"email_account.db\"\ndef email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_account_db_name",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_email_account_db_name() -> str:\n    return \"email_account.db\"\ndef email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to setup database\n@log_errors",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "email_account_db_name",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to setup database\n@log_errors\n@email_account_db_name\nasync def setup_database(email_account_db_name: str):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_address_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_email_address_from_email_account(email_account):\n    return email_account[0]  # Email is the first element\n# Helper function to get POP3 server from email account details\ndef get_pop_server_from_email_account(email_account):\n    return email_account[1]  # POP3 server is the second element\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_pop_server_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_pop_server_from_email_account(email_account):\n    return email_account[1]  # POP3 server is the second element\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_pop_port_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_smtp_server_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_smtp_port_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_address_password_from_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):\n    return get_pop_port_from_email_account(email_account) is not None\n# Helper function to check if SMTP server is present in email account details\ndef check_smtp_server_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "check_pop_server_in_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):\n    return get_pop_port_from_email_account(email_account) is not None\n# Helper function to check if SMTP server is present in email account details\ndef check_smtp_server_in_email_account(email_account):\n    return get_smtp_server_from_email_account(email_account) is not None\n# Helper function to check if SMTP port is present in email account details\ndef check_smtp_port_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "check_pop_port_in_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def check_pop_port_in_email_account(email_account):\n    return get_pop_port_from_email_account(email_account) is not None\n# Helper function to check if SMTP server is present in email account details\ndef check_smtp_server_in_email_account(email_account):\n    return get_smtp_server_from_email_account(email_account) is not None\n# Helper function to check if SMTP port is present in email account details\ndef check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "check_smtp_server_in_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def check_smtp_server_in_email_account(email_account):\n    return get_smtp_server_from_email_account(email_account) is not None\n# Helper function to check if SMTP port is present in email account details\ndef check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "check_smtp_port_in_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_in_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:\n        await conn.execute(\"UPDATE email_accounts SET is_default = 0\")\n        await conn.execute(\n            \"UPDATE email_accounts SET is_default = 1 WHERE email = ?\", (email_address,)",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "is_valid_email",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def is_valid_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    return re.match(pattern, email) is not None\n# Function to request missing email account details from user\nasync def get_email_account_from_user(email_address, existing_details):\n    root = tk.Tk()\n    root.withdraw()  # Hide the main window\n    email_account = existing_details.copy()  # Start with existing details\n    # Check and ask for missing POP server\n    if not check_pop_server_in_email_account(email_account):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "error_logger",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "error_logger = logging.getLogger(\"error_logger\")\nerror_logger.setLevel(logging.ERROR)\nerror_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "error_handler",
+        "kind": 5,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "error_handler = logging.FileHandler(\"error_logs.log\")\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)",
+        "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
     {

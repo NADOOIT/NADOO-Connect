@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 import logging
 
-from nadoo_connect.email import send_email
+from nadoo_connect.nadoo_email import send_email
 from nadoo_connect import record_execution_in_db, load_or_request_config
 
 # Define directories
