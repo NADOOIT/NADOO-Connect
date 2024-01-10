@@ -90,35 +90,29 @@ async def setup_database(email_account_db_name: str):
         )
         await conn.commit()
 
-
 # Helper function to get the email address from email account details
 def get_email_address_from_email_account(email_account):
-    return email_account[0]  # Email is the first element
-
+    return email_account.get("email")
 
 # Helper function to get POP3 server from email account details
 def get_pop_server_from_email_account(email_account):
-    return email_account[1]  # POP3 server is the second element
-
+    return email_account.get("pop_server")
 
 # Helper function to get POP3 port from email account details
 def get_pop_port_from_email_account(email_account):
-    return email_account[2]  # POP3 port is the third element
-
+    return email_account.get("pop_port")
 
 # Helper function to get SMTP server from email account details
 def get_smtp_server_from_email_account(email_account):
-    return email_account[3]  # SMTP server is the fourth element
-
+    return email_account.get("smtp_server")
 
 # Helper function to get SMTP port from email account details
 def get_smtp_port_from_email_account(email_account):
-    return email_account[4]  # SMTP port is the fifth element
-
+    return email_account.get("smtp_port")
 
 # Helper function to get the password from email account details
 def get_email_address_password_from_email_account(email_account):
-    return email_account[5]  # Password is the sixth element
+    return email_account.get("password")
 
 
 # Helper function to check if POP3 server is present in email account details
@@ -157,46 +151,41 @@ async def set_default_email_address(email_address: str, email_account_db_name: s
         )
         await conn.commit()
 
-
-# Async function to get default email account
 @log_errors
 @email_account_db_name
 async def get_default_email_account(email_account_db_name: str):
     async with aiosqlite.connect(email_account_db_name) as conn:
-        # Check if the 'email_accounts' table exists and create it if not
-        await conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS email_accounts (
-                email TEXT PRIMARY KEY,
-                pop_server TEXT,
-                pop_port INTEGER,
-                smtp_server TEXT,
-                smtp_port INTEGER,
-                password TEXT,
-                is_default BOOLEAN DEFAULT 0
-            );
-            """
-        )
-        await conn.commit()
-
-        # Now perform the query
         cursor = await conn.execute("SELECT * FROM email_accounts WHERE is_default = 1")
         result = await cursor.fetchone()
         await cursor.close()
-        return result
+
+        if result:
+            keys = ["email", "pop_server", "pop_port", "smtp_server", "smtp_port", "password", "is_default"]
+            return dict(zip(keys, result))
+        
+        email_account = await get_email_account_from_user({})
+        if email_account:
+            await save_email_account(email_account_db_name, email_account)
+            email_account["is_default"] = 1  # Set as default
+            return email_account
+        return None
 
 
-# Async function to get email account details
+
+
 @log_errors
 @email_account_db_name
-async def get_email_account_for_email_address(
-    email_account_db_name: str, email_address: Optional[str] = None
-):
+async def get_email_account_for_email_address(email_account_db_name: str, email_address: Optional[str] = None):
     async with aiosqlite.connect(email_account_db_name) as conn:
-        async with conn.execute(
-            "SELECT * FROM email_accounts WHERE email = ?", (email_address,)
-        ) as cursor:
-            return await cursor.fetchone()
+        cursor = await conn.execute("SELECT * FROM email_accounts WHERE email = ?", (email_address,))
+        result = await cursor.fetchone()
+        await cursor.close()
+        
+        if result:
+            keys = ["email", "pop_server", "pop_port", "smtp_server", "smtp_port", "password", "is_default"]
+            return dict(zip(keys, result))
+        return None
+
 
 
 # Async function to save or update email account details in the database
@@ -306,6 +295,12 @@ async def get_email_account_from_user(email_account):
             "Password", "Enter email password:", show="*"
         )
 
+    # Check and ask for missing email address
+    if "email" not in email_account or not email_account["email"]:
+        email_account["email"] = simpledialog.askstring(
+            "Email Address", "Enter email address:"
+        )
+
     option_save_email_account = simpledialog.askyesno(
         "Save Details", "Do you want to save these details?"
     )
@@ -313,11 +308,11 @@ async def get_email_account_from_user(email_account):
     root.destroy()
 
     if option_save_email_account:
-        await save_email_account(email_address, email_account)
+        await save_email_account(email_account["email"], email_account)
 
     return email_account
 
-
+""" 
 # Async function to get emails for an email address
 @log_errors
 @email_account_db_name
@@ -357,3 +352,4 @@ async def get_emails_for_email_address(email_address, email_account_db_name: str
         logging.error(f"Error retrieving emails: {e}")
 
     return emails
+ """
