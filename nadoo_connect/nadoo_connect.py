@@ -397,7 +397,7 @@ def calculate_size(data):
 
 async def main():
     customer_program_uuid = "specific-uuid-from-database"
-    for i in range(10):
+    for i in range(1):
         await create_execution(customer_program_uuid)
 
 

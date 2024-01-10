@@ -258,59 +258,64 @@ def is_valid_email(email):
     pattern = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
     return re.match(pattern, email) is not None
 
+import tkinter as tk
+from tkinter import simpledialog, Label, Entry, Button, Checkbutton, IntVar
 
-# Function to request missing email account details from user
+# Custom dialog class
+class EmailAccountDialog(simpledialog.Dialog):
+    def body(self, master):
+        self.entries = {}
+
+        Label(master, text="POP Server:").grid(row=0)
+        self.entries["pop_server"] = Entry(master)
+        self.entries["pop_server"].grid(row=0, column=1)
+
+        Label(master, text="POP Port:").grid(row=1)
+        self.entries["pop_port"] = Entry(master)
+        self.entries["pop_port"].grid(row=1, column=1)
+
+        Label(master, text="SMTP Server:").grid(row=2)
+        self.entries["smtp_server"] = Entry(master)
+        self.entries["smtp_server"].grid(row=2, column=1)
+
+        Label(master, text="SMTP Port:").grid(row=3)
+        self.entries["smtp_port"] = Entry(master)
+        self.entries["smtp_port"].grid(row=3, column=1)
+
+        Label(master, text="Password:").grid(row=4)
+        self.entries["password"] = Entry(master, show="*")
+        self.entries["password"].grid(row=4, column=1)
+
+        Label(master, text="Email:").grid(row=5)
+        self.entries["email"] = Entry(master)
+        self.entries["email"].grid(row=5, column=1)
+
+        self.save_var = IntVar()
+        self.check_save = Checkbutton(master, text="Save Details", variable=self.save_var)
+        self.check_save.grid(row=6, columnspan=2)
+
+        return self.entries["pop_server"]  # Initial focus
+
+    def apply(self):
+        self.result = {key: entry.get() for key, entry in self.entries.items()}
+        self.result["save_details"] = bool(self.save_var.get())
+
+# Function to request email account details from user
 async def get_email_account_from_user(email_account):
     root = tk.Tk()
     root.withdraw()  # Hide the main window
-    email_account = email_account.copy()  # Start with existing details
 
-    # Check and ask for missing POP server
-    if not check_pop_server_in_email_account(email_account):
-        email_account["pop_server"] = simpledialog.askstring(
-            "POP Server", "Enter POP server:"
-        )
-
-    # Check and ask for missing POP port
-    if not check_pop_port_in_email_account(email_account):
-        email_account["pop_port"] = simpledialog.askinteger(
-            "POP Port", "Enter POP port:"
-        )
-
-    # Check and ask for missing SMTP server
-    if not check_smtp_server_in_email_account(email_account):
-        email_account["smtp_server"] = simpledialog.askstring(
-            "SMTP Server", "Enter SMTP server:"
-        )
-
-    # Check and ask for missing SMTP port
-    if not check_smtp_port_in_email_account(email_account):
-        email_account["smtp_port"] = simpledialog.askinteger(
-            "SMTP Port", "Enter SMTP port:"
-        )
-
-    # Check and ask for missing password
-    if not check_password_in_email_account(email_account):
-        email_account["password"] = simpledialog.askstring(
-            "Password", "Enter email password:", show="*"
-        )
-
-    # Check and ask for missing email address
-    if "email" not in email_account or not email_account["email"]:
-        email_account["email"] = simpledialog.askstring(
-            "Email Address", "Enter email address:"
-        )
-
-    option_save_email_account = simpledialog.askyesno(
-        "Save Details", "Do you want to save these details?"
-    )
-
+    dialog = EmailAccountDialog(root, title="Enter Email Account Details")
+    email_account_details = dialog.result
     root.destroy()
 
-    if option_save_email_account:
-        await save_email_account(email_account["email"], email_account)
+    if email_account_details and email_account_details.get("save_details"):
+        await save_email_account(email_account_details)
 
-    return email_account
+    return email_account_details
+
+# Replace 'save_email_account' with the appropriate function to save the account details
+
 
 """ 
 # Async function to get emails for an email address
