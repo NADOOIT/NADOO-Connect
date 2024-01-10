@@ -6,18 +6,16 @@ import portalocker
 import time
 from datetime import datetime
 from dotenv import load_dotenv
-import aiosmtplib
-from email.mime.text import MIMEText
 from tkinter import simpledialog, Tk
 import logging
 import asyncio
 import aiofiles
-import multiprocessing
-from multiprocessing import Process, Queue
+from multiprocessing import Process
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
-from nadoo_connect.email import send_email
+from nadoo_email import *
+
 
 # Configure logging to display level, process ID, and message
 logging.basicConfig(
@@ -59,13 +57,7 @@ async def load_or_request_config():
 
 
 def get_config_from_env_or_prompt():
-    required_vars = [
-        "SMTP_SERVER",
-        "SMTP_PORT",
-        "EMAIL",
-        "PASSWORD",
-        "DESTINATION_EMAIL",
-    ]
+    required_vars = []  # Empty list for now
     config = {var: os.getenv(var) for var in required_vars}
     missing_configs = {var for var in required_vars if not config[var]}
     if missing_configs:
@@ -86,10 +78,18 @@ def request_missing_config(missing_configs):
 
 
 def save_missing_config_to_env(config):
+    existing_config = {}
+    if os.path.exists(".env"):
+        with open(".env", "r") as env_file:
+            for line in env_file:
+                var, value = line.strip().split("=", 1)
+                existing_config[var] = value
+
     with open(".env", "a") as env_file:
         for var, value in config.items():
-            if value is not None:
-                env_file.write(f"{var}={value}\n")
+            if var not in existing_config or existing_config[var] != value:
+                if value is not None:
+                    env_file.write(f"{var}={value}\n")
 
 
 def record_execution_in_db(execution_uuid, customer_program_uuid, is_sent):
@@ -128,6 +128,7 @@ def inject_config(async_func):
     return wrapper
 
 
+# TODO #7 remove config
 @inject_config
 async def create_execution(customer_program_uuid, config=None):
     await setup_directories_async()
@@ -281,8 +282,8 @@ async def process_rpc_requests(config):
     return len(batched_rpc_data) > 0  # Return True if any requests were processed
 
 
-async def process_execution_requests(execution_files, config):
-    batch_size_limit = 200  # Define a suitable batch size limit
+async def process_execution_requests(execution_files):
+    batch_size_limit = 200
     batched_execution_data = []
 
     for filename in execution_files[:batch_size_limit]:
@@ -294,17 +295,23 @@ async def process_execution_requests(execution_files, config):
         if len(batched_execution_data) >= batch_size_limit:
             break
 
-    logger.debug("Processing batched execution requests")
     if batched_execution_data:
         email_content = json.dumps(batched_execution_data)
+        default_email_account = await get_default_email_account()
+        execution_email_address = get_execution_email_address()
+
         email_sent = await send_email(
             "Batched Executions",
             email_content,
-            config["DESTINATION_EMAIL"],
-            config["SMTP_SERVER"],
-            int(config["SMTP_PORT"]),
-            config["EMAIL"],
-            config["PASSWORD"],
+            execution_email_address,
+            get_smtp_server_from_email_account(default_email_account),  # SMTP server
+            int(get_smtp_port_from_email_account(default_email_account)),  # SMTP port
+            get_email_address_from_email_account(
+                default_email_account
+            ),  # Email (same as 'From' address)
+            get_email_address_password_from_email_account(
+                default_email_account
+            ),  # Password
         )
 
         logger.info(f"Email sent: {email_sent}")
@@ -381,7 +388,7 @@ def calculate_size(data):
 
 async def main():
     customer_program_uuid = "specific-uuid-from-database"
-    for i in range(1000):
+    for i in range(10):
         await create_execution(customer_program_uuid)
 
 
