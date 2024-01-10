@@ -10,6 +10,7 @@ import time
 from datetime import datetime
 import logging
 
+
 from nadoo_connect.nadoo_email import send_email
 from nadoo_connect import record_execution_in_db, load_or_request_config
 
@@ -22,12 +23,19 @@ rpc_file_queue = queue.Queue()
 execution_file_queue = queue.Queue()
 
 
-# Function to set up a dedicated logger for this script
 def setup_logger(name, log_file, level=logging.DEBUG):
     """Function to setup as many loggers as you want"""
 
+    # Create 'logs' directory if it doesn't exist
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+
+    # Full path for log file
+    log_file_path = os.path.join(logs_dir, log_file)
+
     # Create a logger
-    handler = logging.FileHandler(log_file)
+    handler = logging.FileHandler(log_file_path)
     formatter = logging.Formatter(
         "%(asctime)s - %(process)d - %(levelname)s - %(message)s"
     )

@@ -16,13 +16,18 @@ import traceback
 
 from nadoo_email import *
 
+# Create 'logs' directory if it doesn't exist
+logs_dir = "logs"
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
 
-# Configure logging to display level, process ID, and message
+# Configure logging
+log_file_path = os.path.join(logs_dir, "nadoo_connect.log")
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="nadoo_connect.log",  # Specify the filename here
-    filemode="a",  # 'a' means append (add logs to the end of the file)
-    format="%(asctime)s - %(process)d - %(levelname)s - %(message)s",  # Include timestamp, process ID, log level, and message
+    filename=log_file_path,  # Path to log file in 'logs' directory
+    filemode="a",  # 'a' means append
+    format="%(asctime)s - %(process)d - %(levelname)s - %(message)s",  # Log format
 )
 
 # Assuming that the logger has been configured globally
@@ -214,13 +219,13 @@ def start_sender_loop_if_not_running(config):
                 logger.warning("A sender loop process is already running.")
                 return
             logger.debug("Lock acquired. Starting sender loop process.")
-            sender_process = Process(target=run_sender_loop_process, args=(config,))
+            sender_process = Process(target=run_sender_loop_process)
             sender_process.start()
     except portalocker.exceptions.LockException:
         logger.warning("Unable to acquire lock, another process may be running.")
 
 
-async def process_rpc_requests(config):
+async def process_rpc_requests():
     batch_size_limit = 5  # Maximum number of requests to batch
     max_wait_time = 5  # Maximum time to wait in seconds
     min_wait_time = 1  # Minimum time to wait for additional requests
@@ -257,17 +262,21 @@ async def process_rpc_requests(config):
 
         await asyncio.sleep(0.1)
 
+    rpc_email_address = get_rpc_email_address()
+
+    default_email_account = await get_default_email_account()
+
     # Process the batched RPC requests
     if batched_rpc_data:
         email_content = json.dumps(batched_rpc_data)
         email_sent = await send_email(
             "Batched RPC Requests",
             email_content,
-            config["DESTINATION_EMAIL"],
-            config["SMTP_SERVER"],
-            int(config["SMTP_PORT"]),
-            config["EMAIL"],
-            config["PASSWORD"],
+            rpc_email_address,
+            get_smtp_server_from_email_account(default_email_account),
+            int(get_smtp_port_from_email_account(default_email_account)),
+            get_email_address_from_email_account(default_email_account),
+            get_email_address_password_from_email_account(default_email_account),
         )
 
         if email_sent:
@@ -327,19 +336,19 @@ async def process_execution_requests(execution_files):
     return len(batched_execution_data) > 0
 
 
-def run_sender_loop_process(config):
+def run_sender_loop_process():
     try:
         logger.debug("Process started, reacquiring lock...")
         with portalocker.Lock(lockfile_path, mode="w", timeout=5):  # Consistent timeout
             logger.debug("Lock reacquired by process. Running sender loop.")
-            asyncio.run(sender_loop(config))
+            asyncio.run(sender_loop())
     except portalocker.exceptions.LockException:
         logger.warning("Unable to reacquire lock in process, exiting.")
     finally:
         logger.debug("Sender loop process ending, releasing lock.")
 
 
-async def sender_loop(config):
+async def sender_loop():
     wait_time = 10  # Shorter wait time for quicker checks
     idle_timeout = 120  # Timeout duration in seconds
     last_activity_time = time.time()
@@ -355,7 +364,7 @@ async def sender_loop(config):
                 logger.info("Idle timeout exceeded, stopping sender loop.")
                 break
 
-            rpc_requests_processed = await process_rpc_requests(config)
+            rpc_requests_processed = await process_rpc_requests()
             execution_files_processed = False
 
             if not rpc_requests_processed:
@@ -364,7 +373,7 @@ async def sender_loop(config):
                 ]
                 if execution_files:
                     logger.debug("Processing execution requests.")
-                    await process_execution_requests(execution_files, config)
+                    await process_execution_requests(execution_files)
                     execution_files_processed = True
 
             # Update last_activity_time if there was activity
