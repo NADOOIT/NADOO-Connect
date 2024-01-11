@@ -58,6 +58,11 @@ def main():
     email_account = get_email_account_from_user()
     print(email_account)
     if email_account:
+        # Set as default email account based on user input
+        email_account[
+            "is_default"
+        ] = True  # Or use logic to determine if it should be default
+
         asyncio.run(
             save_email_account(
                 email_account_db_name="email_account.db", email_account=email_account

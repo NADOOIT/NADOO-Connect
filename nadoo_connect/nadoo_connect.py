@@ -14,7 +14,7 @@ from multiprocessing import Process
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
-
+from .nadoo_email import *
 
 
 # Create 'logs' directory if it doesn't exist
@@ -396,7 +396,7 @@ def calculate_size(data):
 
 async def main():
     customer_program_uuid = "specific-uuid-from-database"
-    for i in range(1):
+    for i in range(201):
         await create_execution(customer_program_uuid)
 
 

@@ -4,11 +4,14 @@ import sqlite3
 from datetime import datetime
 import pytest
 from unittest.mock import AsyncMock, patch
-from nadoo_connect import *
+
 
 import os
 import shutil
 import tempfile
+from nadoo_connect.nadoo_connect import *
+
+from nadoo_connect.nadoo_email import *
 
 
 @pytest.mark.asyncio

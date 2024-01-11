@@ -11,7 +11,8 @@ import pytest
 import glob
 import os
 
-from nadoo_connect import *
+
+from nadoo_connect.nadoo_email import *
 
 
 @pytest.fixture(scope="session", autouse=True)

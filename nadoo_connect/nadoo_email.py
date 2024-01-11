@@ -173,6 +173,11 @@ def check_password_in_email_account(email_account):
     return get_email_address_password_from_email_account(email_account) is not None
 
 
+# Helper function to check if the email account is the default account
+def is_default_email_account(email_account):
+    return email_account.get("is_default")
+
+
 # Async function to set default email address
 @log_errors
 @email_account_db_name
@@ -246,6 +251,7 @@ async def save_email_account(*, email_account_db_name: str, email_account):
     smtp_server = get_smtp_server_from_email_account(email_account)
     smtp_port = get_smtp_port_from_email_account(email_account)
     password = get_email_address_password_from_email_account(email_account)
+    is_default = is_default_email_account(email_account)
 
     async with aiosqlite.connect(email_account_db_name) as conn:
         # Check if a record with the given email already exists
@@ -259,22 +265,44 @@ async def save_email_account(*, email_account_db_name: str, email_account):
             await conn.execute(
                 """
                 UPDATE email_accounts
-                SET pop_server = ?, pop_port = ?, smtp_server = ?, smtp_port = ?, password = ?
+                SET pop_server = ?, pop_port = ?, smtp_server = ?, smtp_port = ?, password = ?, is_default = ?
                 WHERE email = ?
                 """,
-                (pop_server, pop_port, smtp_server, smtp_port, password, email_address),
+                (
+                    pop_server,
+                    pop_port,
+                    smtp_server,
+                    smtp_port,
+                    password,
+                    is_default,
+                    email_address,
+                ),
             )
         else:
             # Insert new record
             await conn.execute(
                 """
-                INSERT INTO email_accounts (email, pop_server, pop_port, smtp_server, smtp_port, password)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO email_accounts (email, pop_server, pop_port, smtp_server, smtp_port, password, is_default)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
-                (email_address, pop_server, pop_port, smtp_server, smtp_port, password),
+                (
+                    email_address,
+                    pop_server,
+                    pop_port,
+                    smtp_server,
+                    smtp_port,
+                    password,
+                    is_default,
+                ),
             )
 
         await conn.commit()
+
+        # Set as default email account if applicable
+        if is_default:
+            await set_default_email_address(
+                email_address, email_account_db_name=email_account_db_name
+            )
 
 
 # Async function to send email
