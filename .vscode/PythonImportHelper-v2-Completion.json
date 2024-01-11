@@ -265,54 +265,6 @@
         "documentation": {}
     },
     {
-        "label": "send_email",
-        "importPath": "nadoo_connect.nadoo_email",
-        "description": "nadoo_connect.nadoo_email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.nadoo_email",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "nadoo_connect.nadoo_email",
-        "description": "nadoo_connect.nadoo_email",
-        "isExtraImport": true,
-        "detail": "nadoo_connect.nadoo_email",
-        "documentation": {}
-    },
-    {
-        "label": "record_execution_in_db",
-        "importPath": "nadoo_connect",
-        "description": "nadoo_connect",
-        "isExtraImport": true,
-        "detail": "nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "load_or_request_config",
-        "importPath": "nadoo_connect",
-        "description": "nadoo_connect",
-        "isExtraImport": true,
-        "detail": "nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "nadoo_connect",
-        "description": "nadoo_connect",
-        "isExtraImport": true,
-        "detail": "nadoo_connect",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "nadoo_connect",
-        "description": "nadoo_connect",
-        "isExtraImport": true,
-        "detail": "nadoo_connect",
-        "documentation": {}
-    },
-    {
         "label": "pytest",
         "kind": 6,
         "isExtraImport": true,
@@ -371,6 +323,30 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -386,6 +362,14 @@
         "importPath": "tempfile",
         "description": "tempfile",
         "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "nadoo_connect.nadoo_connect",
+        "description": "nadoo_connect.nadoo_connect",
+        "isExtraImport": true,
+        "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
     {
@@ -691,7 +675,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(1):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
+        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(201):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -943,7 +927,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def check_smtp_server_in_email_account(email_account):\n    return get_smtp_server_from_email_account(email_account) is not None\n# Helper function to check if SMTP port is present in email account details\ndef check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors",
+        "peekOfCode": "def check_smtp_server_in_email_account(email_account):\n    return get_smtp_server_from_email_account(email_account) is not None\n# Helper function to check if SMTP port is present in email account details\ndef check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Helper function to check if the email account is the default account\ndef is_default_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -952,7 +936,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:",
+        "peekOfCode": "def check_smtp_port_in_email_account(email_account):\n    return get_smtp_port_from_email_account(email_account) is not None\n# Helper function to check if the password is present in email account details\ndef check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Helper function to check if the email account is the default account\ndef is_default_email_account(email_account):\n    return email_account.get(\"is_default\")\n# Async function to set default email address\n@log_errors",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -961,7 +945,16 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:\n        await conn.execute(\"UPDATE email_accounts SET is_default = 0\")\n        await conn.execute(\n            \"UPDATE email_accounts SET is_default = 1 WHERE email = ?\", (email_address,)",
+        "peekOfCode": "def check_password_in_email_account(email_account):\n    return get_email_address_password_from_email_account(email_account) is not None\n# Helper function to check if the email account is the default account\ndef is_default_email_account(email_account):\n    return email_account.get(\"is_default\")\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "is_default_email_account",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def is_default_email_account(email_account):\n    return email_account.get(\"is_default\")\n# Async function to set default email address\n@log_errors\n@email_account_db_name\nasync def set_default_email_address(email_address: str, email_account_db_name: str):\n    async with aiosqlite.connect(email_account_db_name) as conn:\n        await conn.execute(\"UPDATE email_accounts SET is_default = 0\")\n        await conn.execute(\n            \"UPDATE email_accounts SET is_default = 1 WHERE email = ?\", (email_address,)",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -1285,7 +1278,7 @@
         "kind": 2,
         "importPath": "install",
         "description": "install",
-        "peekOfCode": "def main():\n    setup_database(email_account_db_name=\"email_account.db\")\n    email_account = get_email_account_from_user()\n    print(email_account)\n    if email_account:\n        asyncio.run(\n            save_email_account(\n                email_account_db_name=\"email_account.db\", email_account=email_account\n            )\n        )",
+        "peekOfCode": "def main():\n    setup_database(email_account_db_name=\"email_account.db\")\n    email_account = get_email_account_from_user()\n    print(email_account)\n    if email_account:\n        # Set as default email account based on user input\n        email_account[\n            \"is_default\"\n        ] = True  # Or use logic to determine if it should be default\n        asyncio.run(",
         "detail": "install",
         "documentation": {}
     }
