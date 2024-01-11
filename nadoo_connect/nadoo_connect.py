@@ -6,25 +6,29 @@ import portalocker
 import time
 from datetime import datetime
 from dotenv import load_dotenv
-import aiosmtplib
-from email.mime.text import MIMEText
 from tkinter import simpledialog, Tk
 import logging
 import asyncio
 import aiofiles
-import multiprocessing
-from multiprocessing import Process, Queue
+from multiprocessing import Process
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
-from nadoo_connect.email import send_email
+from .nadoo_email import *
 
-# Configure logging to display level, process ID, and message
+
+# Create 'logs' directory if it doesn't exist
+logs_dir = "logs"
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
+
+# Configure logging
+log_file_path = os.path.join(logs_dir, "nadoo_connect.log")
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="nadoo_connect.log",  # Specify the filename here
-    filemode="a",  # 'a' means append (add logs to the end of the file)
-    format="%(asctime)s - %(process)d - %(levelname)s - %(message)s",  # Include timestamp, process ID, log level, and message
+    filename=log_file_path,  # Path to log file in 'logs' directory
+    filemode="a",  # 'a' means append
+    format="%(asctime)s - %(process)d - %(levelname)s - %(message)s",  # Log format
 )
 
 # Assuming that the logger has been configured globally
@@ -59,13 +63,7 @@ async def load_or_request_config():
 
 
 def get_config_from_env_or_prompt():
-    required_vars = [
-        "SMTP_SERVER",
-        "SMTP_PORT",
-        "EMAIL",
-        "PASSWORD",
-        "DESTINATION_EMAIL",
-    ]
+    required_vars = []  # Empty list for now
     config = {var: os.getenv(var) for var in required_vars}
     missing_configs = {var for var in required_vars if not config[var]}
     if missing_configs:
@@ -86,10 +84,18 @@ def request_missing_config(missing_configs):
 
 
 def save_missing_config_to_env(config):
+    existing_config = {}
+    if os.path.exists(".env"):
+        with open(".env", "r") as env_file:
+            for line in env_file:
+                var, value = line.strip().split("=", 1)
+                existing_config[var] = value
+
     with open(".env", "a") as env_file:
         for var, value in config.items():
-            if value is not None:
-                env_file.write(f"{var}={value}\n")
+            if var not in existing_config or existing_config[var] != value:
+                if value is not None:
+                    env_file.write(f"{var}={value}\n")
 
 
 def record_execution_in_db(execution_uuid, customer_program_uuid, is_sent):
@@ -128,12 +134,11 @@ def inject_config(async_func):
     return wrapper
 
 
-@inject_config
 async def create_execution(customer_program_uuid, config=None):
     await setup_directories_async()
     execution_data = get_execution_data(customer_program_uuid)
     await save_execution_data_async(execution_data)
-    start_sender_loop_if_not_running(config)
+    start_sender_loop_if_not_running()
 
 
 async def save_execution_data_async(execution_data):
@@ -204,7 +209,7 @@ def save_execution_data(execution_data):
         json.dump(execution_data, file)
 
 
-def start_sender_loop_if_not_running(config):
+def start_sender_loop_if_not_running():
     global sender_process
     try:
         logger.debug("Attempting to acquire lock before starting process...")
@@ -213,13 +218,13 @@ def start_sender_loop_if_not_running(config):
                 logger.warning("A sender loop process is already running.")
                 return
             logger.debug("Lock acquired. Starting sender loop process.")
-            sender_process = Process(target=run_sender_loop_process, args=(config,))
+            sender_process = Process(target=run_sender_loop_process)
             sender_process.start()
     except portalocker.exceptions.LockException:
         logger.warning("Unable to acquire lock, another process may be running.")
 
 
-async def process_rpc_requests(config):
+async def process_rpc_requests():
     batch_size_limit = 5  # Maximum number of requests to batch
     max_wait_time = 5  # Maximum time to wait in seconds
     min_wait_time = 1  # Minimum time to wait for additional requests
@@ -256,17 +261,21 @@ async def process_rpc_requests(config):
 
         await asyncio.sleep(0.1)
 
+    rpc_email_address = get_rpc_email_address()
+
+    default_email_account = await get_default_email_account()
+
     # Process the batched RPC requests
     if batched_rpc_data:
         email_content = json.dumps(batched_rpc_data)
         email_sent = await send_email(
             "Batched RPC Requests",
             email_content,
-            config["DESTINATION_EMAIL"],
-            config["SMTP_SERVER"],
-            int(config["SMTP_PORT"]),
-            config["EMAIL"],
-            config["PASSWORD"],
+            rpc_email_address,
+            get_smtp_server_from_email_account(default_email_account),
+            int(get_smtp_port_from_email_account(default_email_account)),
+            get_email_address_from_email_account(default_email_account),
+            get_email_address_password_from_email_account(default_email_account),
         )
 
         if email_sent:
@@ -281,8 +290,8 @@ async def process_rpc_requests(config):
     return len(batched_rpc_data) > 0  # Return True if any requests were processed
 
 
-async def process_execution_requests(execution_files, config):
-    batch_size_limit = 200  # Define a suitable batch size limit
+async def process_execution_requests(execution_files):
+    batch_size_limit = 200
     batched_execution_data = []
 
     for filename in execution_files[:batch_size_limit]:
@@ -294,17 +303,23 @@ async def process_execution_requests(execution_files, config):
         if len(batched_execution_data) >= batch_size_limit:
             break
 
-    logger.debug("Processing batched execution requests")
     if batched_execution_data:
         email_content = json.dumps(batched_execution_data)
+        default_email_account = await get_default_email_account()
+        execution_email_address = get_execution_email_address()
+
         email_sent = await send_email(
             "Batched Executions",
             email_content,
-            config["DESTINATION_EMAIL"],
-            config["SMTP_SERVER"],
-            int(config["SMTP_PORT"]),
-            config["EMAIL"],
-            config["PASSWORD"],
+            execution_email_address,
+            get_smtp_server_from_email_account(default_email_account),  # SMTP server
+            int(get_smtp_port_from_email_account(default_email_account)),  # SMTP port
+            get_email_address_from_email_account(
+                default_email_account
+            ),  # Email (same as 'From' address)
+            get_email_address_password_from_email_account(
+                default_email_account
+            ),  # Password
         )
 
         logger.info(f"Email sent: {email_sent}")
@@ -320,19 +335,19 @@ async def process_execution_requests(execution_files, config):
     return len(batched_execution_data) > 0
 
 
-def run_sender_loop_process(config):
+def run_sender_loop_process():
     try:
         logger.debug("Process started, reacquiring lock...")
         with portalocker.Lock(lockfile_path, mode="w", timeout=5):  # Consistent timeout
             logger.debug("Lock reacquired by process. Running sender loop.")
-            asyncio.run(sender_loop(config))
+            asyncio.run(sender_loop())
     except portalocker.exceptions.LockException:
         logger.warning("Unable to reacquire lock in process, exiting.")
     finally:
         logger.debug("Sender loop process ending, releasing lock.")
 
 
-async def sender_loop(config):
+async def sender_loop():
     wait_time = 10  # Shorter wait time for quicker checks
     idle_timeout = 120  # Timeout duration in seconds
     last_activity_time = time.time()
@@ -348,7 +363,7 @@ async def sender_loop(config):
                 logger.info("Idle timeout exceeded, stopping sender loop.")
                 break
 
-            rpc_requests_processed = await process_rpc_requests(config)
+            rpc_requests_processed = await process_rpc_requests()
             execution_files_processed = False
 
             if not rpc_requests_processed:
@@ -357,7 +372,7 @@ async def sender_loop(config):
                 ]
                 if execution_files:
                     logger.debug("Processing execution requests.")
-                    await process_execution_requests(execution_files, config)
+                    await process_execution_requests(execution_files)
                     execution_files_processed = True
 
             # Update last_activity_time if there was activity
@@ -381,7 +396,7 @@ def calculate_size(data):
 
 async def main():
     customer_program_uuid = "specific-uuid-from-database"
-    for i in range(1000):
+    for i in range(201):
         await create_execution(customer_program_uuid)
 
 

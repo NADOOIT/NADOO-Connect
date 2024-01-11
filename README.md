@@ -55,6 +55,16 @@ result = await get_xyz_for_xyz_remote(uuid, data)
 
 This function sends a request to the backend with the specified UUID, which identifies the function to execute, and data for that function. The function processes the request and returns the result.
 
+### Using `get_emails_for_email_address`
+
+To use `get_emails_for_email_address` in NADOO Connect:
+
+```python
+emails = await get_emails_for_email_address(email_account='optional_specific_email_account')
+```
+
+This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
+
 ## License
 
 This project is licensed under the MIT License. For more details, see the LICENSE file.
@@ -160,10 +170,3 @@ sequenceDiagram
     ProcessingUnit->>NADOOWorkspace: Process and track RPCs/Executions
 ```
 
-To use `get_emails_for_email_address` in NADOO Connect:
-
-```python
-emails = await get_emails_for_email_address(email_account='optional_specific_email_account')
-```
-
-This function asynchronously retrieves emails from the specified email account. If the email_account parameter is not provided, it defaults to the user's email account set in the configuration.
