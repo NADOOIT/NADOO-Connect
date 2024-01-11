@@ -14,7 +14,8 @@ from multiprocessing import Process
 import aiofiles.os as async_os  # Correct import statement for async_os
 import traceback
 
-from nadoo_email import *
+
+
 
 # Create 'logs' directory if it doesn't exist
 logs_dir = "logs"
@@ -133,13 +134,11 @@ def inject_config(async_func):
     return wrapper
 
 
-# TODO #7 remove config
-@inject_config
 async def create_execution(customer_program_uuid, config=None):
     await setup_directories_async()
     execution_data = get_execution_data(customer_program_uuid)
     await save_execution_data_async(execution_data)
-    start_sender_loop_if_not_running(config)
+    start_sender_loop_if_not_running()
 
 
 async def save_execution_data_async(execution_data):
@@ -210,7 +209,7 @@ def save_execution_data(execution_data):
         json.dump(execution_data, file)
 
 
-def start_sender_loop_if_not_running(config):
+def start_sender_loop_if_not_running():
     global sender_process
     try:
         logger.debug("Attempting to acquire lock before starting process...")

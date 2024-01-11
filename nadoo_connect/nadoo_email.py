@@ -1,4 +1,5 @@
 import os
+import sqlite3
 import aiosmtplib
 from email.mime.text import MIMEText
 import logging
@@ -25,16 +26,29 @@ error_handler.setFormatter(
 error_logger.addHandler(error_handler)
 
 
-# Decorator for enhanced error logging
 def log_errors(func):
-    async def async_wrapper(*args, **kwargs):
-        try:
-            return await func(*args, **kwargs)
-        except Exception as e:
-            log_exception(func, args, kwargs, e)
-            raise
+    if asyncio.iscoroutinefunction(func):
 
-    return async_wrapper
+        @functools.wraps(func)
+        async def async_wrapper(*args, **kwargs):
+            try:
+                return await func(*args, **kwargs)
+            except Exception as e:
+                log_exception(func, args, kwargs, e)
+                raise
+
+        return async_wrapper
+    else:
+
+        @functools.wraps(func)
+        def sync_wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                log_exception(func, args, kwargs, e)
+                raise
+
+        return sync_wrapper
 
 
 def log_exception(func, args, kwargs, e):
@@ -61,54 +75,73 @@ def get_email_account_db_name() -> str:
     return "email_account.db"
 
 
+import functools
+import asyncio
+
+
 def email_account_db_name(func):
-    async def wrapper(*args, **kwargs):
+    @functools.wraps(func)
+    def sync_wrapper(*args, **kwargs):
+        if "email_account_db_name" not in kwargs:
+            kwargs["email_account_db_name"] = get_email_account_db_name()
+        return func(*args, **kwargs)
+
+    @functools.wraps(func)
+    async def async_wrapper(*args, **kwargs):
         if "email_account_db_name" not in kwargs:
             kwargs["email_account_db_name"] = get_email_account_db_name()
         return await func(*args, **kwargs)
 
-    return wrapper
+    if asyncio.iscoroutinefunction(func):
+        return async_wrapper
+    else:
+        return sync_wrapper
 
 
-# Async function to setup database
 @log_errors
 @email_account_db_name
-async def setup_database(email_account_db_name: str):
-    async with aiosqlite.connect(email_account_db_name) as conn:
-        await conn.execute(
+def setup_database(*, email_account_db_name: str):
+    with sqlite3.connect(email_account_db_name) as conn:
+        conn.execute(
             """
             CREATE TABLE IF NOT EXISTS email_accounts (
                 email TEXT PRIMARY KEY,
-                pop_server TEXT,    # POP3 server address
-                pop_port INTEGER,   # POP3 server port, typically 995 for SSL/TLS
-                smtp_server TEXT,   # SMTP server address for sending emails
-                smtp_port INTEGER,  # SMTP server port, typically 465 for SSL/TLS
-                password TEXT,      # Password for the email account
+                pop_server TEXT,    -- POP3 server address
+                pop_port INTEGER,   -- POP3 server port, typically 995 for SSL/TLS
+                smtp_server TEXT,   -- SMTP server address for sending emails
+                smtp_port INTEGER,  -- SMTP server port, typically 465 for SSL/TLS
+                password TEXT,      -- Password for the email account
                 is_default BOOLEAN DEFAULT 0
             );
             """
         )
-        await conn.commit()
+        conn.commit()
+
 
 # Helper function to get the email address from email account details
 def get_email_address_from_email_account(email_account):
     return email_account.get("email")
 
+
 # Helper function to get POP3 server from email account details
 def get_pop_server_from_email_account(email_account):
     return email_account.get("pop_server")
+
 
 # Helper function to get POP3 port from email account details
 def get_pop_port_from_email_account(email_account):
     return email_account.get("pop_port")
 
+
 # Helper function to get SMTP server from email account details
 def get_smtp_server_from_email_account(email_account):
     return email_account.get("smtp_server")
 
+
 # Helper function to get SMTP port from email account details
 def get_smtp_port_from_email_account(email_account):
     return email_account.get("smtp_port")
+
 
 # Helper function to get the password from email account details
 def get_email_address_password_from_email_account(email_account):
@@ -151,6 +184,7 @@ async def set_default_email_address(email_address: str, email_account_db_name: s
         )
         await conn.commit()
 
+
 @log_errors
 @email_account_db_name
 async def get_default_email_account(email_account_db_name: str):
@@ -160,38 +194,51 @@ async def get_default_email_account(email_account_db_name: str):
         await cursor.close()
 
         if result:
-            keys = ["email", "pop_server", "pop_port", "smtp_server", "smtp_port", "password", "is_default"]
+            keys = [
+                "email",
+                "pop_server",
+                "pop_port",
+                "smtp_server",
+                "smtp_port",
+                "password",
+                "is_default",
+            ]
             return dict(zip(keys, result))
-        
-        email_account = await get_email_account_from_user({})
-        if email_account:
-            await save_email_account(email_account_db_name, email_account)
-            email_account["is_default"] = 1  # Set as default
-            return email_account
+
+        # Return None if no default email account is found
         return None
-
-
 
 
 @log_errors
 @email_account_db_name
-async def get_email_account_for_email_address(email_account_db_name: str, email_address: Optional[str] = None):
+async def get_email_account_for_email_address(
+    email_account_db_name: str, email_address: Optional[str] = None
+):
     async with aiosqlite.connect(email_account_db_name) as conn:
-        cursor = await conn.execute("SELECT * FROM email_accounts WHERE email = ?", (email_address,))
+        cursor = await conn.execute(
+            "SELECT * FROM email_accounts WHERE email = ?", (email_address,)
+        )
         result = await cursor.fetchone()
         await cursor.close()
-        
+
         if result:
-            keys = ["email", "pop_server", "pop_port", "smtp_server", "smtp_port", "password", "is_default"]
+            keys = [
+                "email",
+                "pop_server",
+                "pop_port",
+                "smtp_server",
+                "smtp_port",
+                "password",
+                "is_default",
+            ]
             return dict(zip(keys, result))
         return None
-
 
 
 # Async function to save or update email account details in the database
 @log_errors
 @email_account_db_name
-async def save_email_account(email_account_db_name: str, email_account):
+async def save_email_account(*, email_account_db_name: str, email_account):
     # Extract details using helper functions
     email_address = get_email_address_from_email_account(email_account)
     pop_server = get_pop_server_from_email_account(email_account)
@@ -257,64 +304,6 @@ async def send_email(
 def is_valid_email(email):
     pattern = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
     return re.match(pattern, email) is not None
-
-import tkinter as tk
-from tkinter import simpledialog, Label, Entry, Button, Checkbutton, IntVar
-
-# Custom dialog class
-class EmailAccountDialog(simpledialog.Dialog):
-    def body(self, master):
-        self.entries = {}
-
-        Label(master, text="POP Server:").grid(row=0)
-        self.entries["pop_server"] = Entry(master)
-        self.entries["pop_server"].grid(row=0, column=1)
-
-        Label(master, text="POP Port:").grid(row=1)
-        self.entries["pop_port"] = Entry(master)
-        self.entries["pop_port"].grid(row=1, column=1)
-
-        Label(master, text="SMTP Server:").grid(row=2)
-        self.entries["smtp_server"] = Entry(master)
-        self.entries["smtp_server"].grid(row=2, column=1)
-
-        Label(master, text="SMTP Port:").grid(row=3)
-        self.entries["smtp_port"] = Entry(master)
-        self.entries["smtp_port"].grid(row=3, column=1)
-
-        Label(master, text="Password:").grid(row=4)
-        self.entries["password"] = Entry(master, show="*")
-        self.entries["password"].grid(row=4, column=1)
-
-        Label(master, text="Email:").grid(row=5)
-        self.entries["email"] = Entry(master)
-        self.entries["email"].grid(row=5, column=1)
-
-        self.save_var = IntVar()
-        self.check_save = Checkbutton(master, text="Save Details", variable=self.save_var)
-        self.check_save.grid(row=6, columnspan=2)
-
-        return self.entries["pop_server"]  # Initial focus
-
-    def apply(self):
-        self.result = {key: entry.get() for key, entry in self.entries.items()}
-        self.result["save_details"] = bool(self.save_var.get())
-
-# Function to request email account details from user
-async def get_email_account_from_user(email_account):
-    root = tk.Tk()
-    root.withdraw()  # Hide the main window
-
-    dialog = EmailAccountDialog(root, title="Enter Email Account Details")
-    email_account_details = dialog.result
-    root.destroy()
-
-    if email_account_details and email_account_details.get("save_details"):
-        await save_email_account(email_account_details)
-
-    return email_account_details
-
-# Replace 'save_email_account' with the appropriate function to save the account details
 
 
 """ 
