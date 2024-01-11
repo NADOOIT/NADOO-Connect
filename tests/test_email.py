@@ -3,13 +3,15 @@ import json
 import aiosqlite
 import pytest
 from unittest.mock import AsyncMock, patch, MagicMock
-from nadoo_connect.nadoo_email import *
+
 
 import aiosqlite
 import pytest
 import pytest
 import glob
 import os
+
+from nadoo_connect import *
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -61,17 +63,38 @@ def test_is_valid_email():
 @pytest.mark.asyncio
 async def test_get_default_email_account(setup_database_for_testing):
     test_db_name = setup_database_for_testing
-    # Your test code using test_db_name
 
     # Set up an in-memory SQLite database
     async with aiosqlite.connect(test_db_name) as conn:
         # Create the email_accounts table and insert test data
         await conn.execute(
-            "CREATE TABLE email_accounts (email TEXT PRIMARY KEY, smtp_server TEXT, smtp_port INTEGER, password TEXT, is_default BOOLEAN DEFAULT 0);"
+            """
+            CREATE TABLE email_accounts (
+                email TEXT PRIMARY KEY, 
+                pop_server TEXT, 
+                pop_port INTEGER, 
+                smtp_server TEXT, 
+                smtp_port INTEGER, 
+                password TEXT, 
+                is_default BOOLEAN DEFAULT 0
+            );
+            """
         )
         await conn.execute(
-            "INSERT INTO email_accounts (email, smtp_server, smtp_port, password, is_default) VALUES (?, ?, ?, ?, ?)",
-            ("default@example.com", "smtp.example.com", 587, "password", 1),
+            """
+            INSERT INTO email_accounts 
+            (email, pop_server, pop_port, smtp_server, smtp_port, password, is_default) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                "default@example.com",
+                "pop.example.com",
+                995,
+                "smtp.example.com",
+                587,
+                "password",
+                1,
+            ),
         )
         await conn.commit()
 
@@ -79,7 +102,16 @@ async def test_get_default_email_account(setup_database_for_testing):
         result = await get_default_email_account(email_account_db_name=test_db_name)
 
         # Assert the expected result
-        assert result == ("default@example.com", "smtp.example.com", 587, "password", 1)
+        expected_result = {
+            "email": "default@example.com",
+            "pop_server": "pop.example.com",
+            "pop_port": 995,
+            "smtp_server": "smtp.example.com",
+            "smtp_port": 587,
+            "password": "password",
+            "is_default": 1,
+        }
+        assert result == expected_result
 
 
 @pytest.mark.asyncio
@@ -110,15 +142,16 @@ async def test_get_email_account_for_email_address(setup_database_for_testing):
         )
 
         # Assert the expected result
-        assert result == (
-            "user@example.com",
-            "pop.example.com",
-            995,
-            "smtp.example.com",
-            587,
-            "password",
-            0,
-        )
+        expected_result = {
+            "email": "user@example.com",
+            "pop_server": "pop.example.com",
+            "pop_port": 995,
+            "smtp_server": "smtp.example.com",
+            "smtp_port": 587,
+            "password": "password",
+            "is_default": 0,
+        }
+        assert result == expected_result
 
 
 @pytest.mark.asyncio

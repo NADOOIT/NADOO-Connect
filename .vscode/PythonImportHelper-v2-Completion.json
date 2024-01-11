@@ -119,6 +119,22 @@
         "documentation": {}
     },
     {
+        "label": "Label",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Entry",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
         "label": "logging",
         "kind": 6,
         "isExtraImport": true,
@@ -172,14 +188,6 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "nadoo_email",
-        "description": "nadoo_email",
-        "isExtraImport": true,
-        "detail": "nadoo_email",
-        "documentation": {}
-    },
-    {
         "label": "aiosmtplib",
         "kind": 6,
         "isExtraImport": true,
@@ -220,6 +228,15 @@
         "importPath": "aiosqlite",
         "description": "aiosqlite",
         "detail": "aiosqlite",
+        "documentation": {}
+    },
+    {
+        "label": "functools",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "functools",
+        "description": "functools",
+        "detail": "functools",
         "documentation": {}
     },
     {
@@ -273,6 +290,14 @@
     },
     {
         "label": "load_or_request_config",
+        "importPath": "nadoo_connect",
+        "description": "nadoo_connect",
+        "isExtraImport": true,
+        "detail": "nadoo_connect",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "nadoo_connect",
         "description": "nadoo_connect",
         "isExtraImport": true,
@@ -621,7 +646,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def inject_config(async_func):\n    async def wrapper(*args, **kwargs):\n        if \"config\" not in kwargs or kwargs[\"config\"] is None:\n            kwargs[\"config\"] = await load_or_request_config()\n        return await async_func(*args, **kwargs)\n    return wrapper\n# TODO #7 remove config\n@inject_config\nasync def create_execution(customer_program_uuid, config=None):\n    await setup_directories_async()",
+        "peekOfCode": "def inject_config(async_func):\n    async def wrapper(*args, **kwargs):\n        if \"config\" not in kwargs or kwargs[\"config\"] is None:\n            kwargs[\"config\"] = await load_or_request_config()\n        return await async_func(*args, **kwargs)\n    return wrapper\nasync def create_execution(customer_program_uuid, config=None):\n    await setup_directories_async()\n    execution_data = get_execution_data(customer_program_uuid)\n    await save_execution_data_async(execution_data)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -639,7 +664,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def save_execution_data(execution_data):\n    filepath = os.path.join(executions_dir, f\"{execution_data['execution_uuid']}.json\")\n    with open(filepath, \"w\") as file:\n        json.dump(execution_data, file)\ndef start_sender_loop_if_not_running(config):\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():",
+        "peekOfCode": "def save_execution_data(execution_data):\n    filepath = os.path.join(executions_dir, f\"{execution_data['execution_uuid']}.json\")\n    with open(filepath, \"w\") as file:\n        json.dump(execution_data, file)\ndef start_sender_loop_if_not_running():\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -648,7 +673,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def start_sender_loop_if_not_running(config):\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():\n                logger.warning(\"A sender loop process is already running.\")\n                return\n            logger.debug(\"Lock acquired. Starting sender loop process.\")\n            sender_process = Process(target=run_sender_loop_process)",
+        "peekOfCode": "def start_sender_loop_if_not_running():\n    global sender_process\n    try:\n        logger.debug(\"Attempting to acquire lock before starting process...\")\n        with portalocker.Lock(lockfile_path, mode=\"w\", timeout=5):  # Increased timeout\n            if sender_process is not None and sender_process.is_alive():\n                logger.warning(\"A sender loop process is already running.\")\n                return\n            logger.debug(\"Lock acquired. Starting sender loop process.\")\n            sender_process = Process(target=run_sender_loop_process)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -666,7 +691,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_connect",
         "description": "nadoo_connect.nadoo_connect",
-        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(10):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
+        "peekOfCode": "def calculate_size(data):\n    return len(json.dumps(data))  # Returns the size of the data in bytes\nasync def main():\n    customer_program_uuid = \"specific-uuid-from-database\"\n    for i in range(1):\n        await create_execution(customer_program_uuid)\nif __name__ == \"__main__\":\n    asyncio.run(main(), debug=True)",
         "detail": "nadoo_connect.nadoo_connect",
         "documentation": {}
     },
@@ -783,7 +808,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)\n        except Exception as e:\n            log_exception(func, args, kwargs, e)\n            raise\n    return async_wrapper\ndef log_exception(func, args, kwargs, e):\n    arg_values = \", \".join(",
+        "peekOfCode": "def log_errors(func):\n    if asyncio.iscoroutinefunction(func):\n        @functools.wraps(func)\n        async def async_wrapper(*args, **kwargs):\n            try:\n                return await func(*args, **kwargs)\n            except Exception as e:\n                log_exception(func, args, kwargs, e)\n                raise\n        return async_wrapper",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -801,7 +826,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_execution_email_address():\n    # Hardcoded email address\n    return \"executions@nadooit.de\"\ndef get_rpc_email_address():\n    # Hardcoded email address\n    return \"rpc@nadooit.de\"\ndef get_email_account_db_name() -> str:\n    return \"email_account.db\"\ndef email_account_db_name(func):\n    async def wrapper(*args, **kwargs):",
+        "peekOfCode": "def get_execution_email_address():\n    # Hardcoded email address\n    return \"executions@nadooit.de\"\ndef get_rpc_email_address():\n    # Hardcoded email address\n    return \"rpc@nadooit.de\"\ndef get_email_account_db_name() -> str:\n    return \"email_account.db\"\nimport functools\nimport asyncio",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -810,7 +835,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_rpc_email_address():\n    # Hardcoded email address\n    return \"rpc@nadooit.de\"\ndef get_email_account_db_name() -> str:\n    return \"email_account.db\"\ndef email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)",
+        "peekOfCode": "def get_rpc_email_address():\n    # Hardcoded email address\n    return \"rpc@nadooit.de\"\ndef get_email_account_db_name() -> str:\n    return \"email_account.db\"\nimport functools\nimport asyncio\ndef email_account_db_name(func):\n    @functools.wraps(func)\n    def sync_wrapper(*args, **kwargs):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -819,7 +844,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_email_account_db_name() -> str:\n    return \"email_account.db\"\ndef email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to setup database\n@log_errors",
+        "peekOfCode": "def get_email_account_db_name() -> str:\n    return \"email_account.db\"\nimport functools\nimport asyncio\ndef email_account_db_name(func):\n    @functools.wraps(func)\n    def sync_wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return func(*args, **kwargs)",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -828,7 +853,16 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def email_account_db_name(func):\n    async def wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return await func(*args, **kwargs)\n    return wrapper\n# Async function to setup database\n@log_errors\n@email_account_db_name\nasync def setup_database(email_account_db_name: str):",
+        "peekOfCode": "def email_account_db_name(func):\n    @functools.wraps(func)\n    def sync_wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()\n        return func(*args, **kwargs)\n    @functools.wraps(func)\n    async def async_wrapper(*args, **kwargs):\n        if \"email_account_db_name\" not in kwargs:\n            kwargs[\"email_account_db_name\"] = get_email_account_db_name()",
+        "detail": "nadoo_connect.nadoo_email",
+        "documentation": {}
+    },
+    {
+        "label": "setup_database",
+        "kind": 2,
+        "importPath": "nadoo_connect.nadoo_email",
+        "description": "nadoo_connect.nadoo_email",
+        "peekOfCode": "def setup_database(*, email_account_db_name: str):\n    with sqlite3.connect(email_account_db_name) as conn:\n        conn.execute(\n            \"\"\"\n            CREATE TABLE IF NOT EXISTS email_accounts (\n                email TEXT PRIMARY KEY,\n                pop_server TEXT,    -- POP3 server address\n                pop_port INTEGER,   -- POP3 server port, typically 995 for SSL/TLS\n                smtp_server TEXT,   -- SMTP server address for sending emails\n                smtp_port INTEGER,  -- SMTP server port, typically 465 for SSL/TLS",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -837,7 +871,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_email_address_from_email_account(email_account):\n    return email_account[0]  # Email is the first element\n# Helper function to get POP3 server from email account details\ndef get_pop_server_from_email_account(email_account):\n    return email_account[1]  # POP3 server is the second element\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):",
+        "peekOfCode": "def get_email_address_from_email_account(email_account):\n    return email_account.get(\"email\")\n# Helper function to get POP3 server from email account details\ndef get_pop_server_from_email_account(email_account):\n    return email_account.get(\"pop_server\")\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account.get(\"pop_port\")\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -846,7 +880,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_pop_server_from_email_account(email_account):\n    return email_account[1]  # POP3 server is the second element\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):",
+        "peekOfCode": "def get_pop_server_from_email_account(email_account):\n    return email_account.get(\"pop_server\")\n# Helper function to get POP3 port from email account details\ndef get_pop_port_from_email_account(email_account):\n    return email_account.get(\"pop_port\")\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account.get(\"smtp_server\")\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -855,7 +889,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_pop_port_from_email_account(email_account):\n    return email_account[2]  # POP3 port is the third element\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):",
+        "peekOfCode": "def get_pop_port_from_email_account(email_account):\n    return email_account.get(\"pop_port\")\n# Helper function to get SMTP server from email account details\ndef get_smtp_server_from_email_account(email_account):\n    return email_account.get(\"smtp_server\")\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account.get(\"smtp_port\")\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -864,7 +898,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_smtp_server_from_email_account(email_account):\n    return email_account[3]  # SMTP server is the fourth element\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):",
+        "peekOfCode": "def get_smtp_server_from_email_account(email_account):\n    return email_account.get(\"smtp_server\")\n# Helper function to get SMTP port from email account details\ndef get_smtp_port_from_email_account(email_account):\n    return email_account.get(\"smtp_port\")\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account.get(\"password\")\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -873,7 +907,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_smtp_port_from_email_account(email_account):\n    return email_account[4]  # SMTP port is the fifth element\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):",
+        "peekOfCode": "def get_smtp_port_from_email_account(email_account):\n    return email_account.get(\"smtp_port\")\n# Helper function to get the password from email account details\ndef get_email_address_password_from_email_account(email_account):\n    return email_account.get(\"password\")\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -882,7 +916,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def get_email_address_password_from_email_account(email_account):\n    return email_account[5]  # Password is the sixth element\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):\n    return get_pop_port_from_email_account(email_account) is not None\n# Helper function to check if SMTP server is present in email account details\ndef check_smtp_server_in_email_account(email_account):",
+        "peekOfCode": "def get_email_address_password_from_email_account(email_account):\n    return email_account.get(\"password\")\n# Helper function to check if POP3 server is present in email account details\ndef check_pop_server_in_email_account(email_account):\n    return get_pop_server_from_email_account(email_account) is not None\n# Helper function to check if POP3 port is present in email account details\ndef check_pop_port_in_email_account(email_account):\n    return get_pop_port_from_email_account(email_account) is not None\n# Helper function to check if SMTP server is present in email account details\ndef check_smtp_server_in_email_account(email_account):",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -936,7 +970,7 @@
         "kind": 2,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "def is_valid_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    return re.match(pattern, email) is not None\n# Function to request missing email account details from user\nasync def get_email_account_from_user(email_address, email_account):\n    root = tk.Tk()\n    root.withdraw()  # Hide the main window\n    email_account = email_account.copy()  # Start with existing details\n    # Check and ask for missing POP server\n    if not check_pop_server_in_email_account(email_account):",
+        "peekOfCode": "def is_valid_email(email):\n    pattern = r\"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)\"\n    return re.match(pattern, email) is not None\n\"\"\" \n# Async function to get emails for an email address\n@log_errors\n@email_account_db_name\nasync def get_emails_for_email_address(email_address, email_account_db_name: str):\n    if not is_valid_email(email_address):\n        logging.error(f\"Invalid email address: {email_address}\")",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -954,7 +988,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "error_logger = logging.getLogger(\"error_logger\")\nerror_logger.setLevel(logging.ERROR)\nerror_handler = logging.FileHandler(os.path.join(logs_dir, \"error_logs.log\"))\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):",
+        "peekOfCode": "error_logger = logging.getLogger(\"error_logger\")\nerror_logger.setLevel(logging.ERROR)\nerror_handler = logging.FileHandler(os.path.join(logs_dir, \"error_logs.log\"))\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\ndef log_errors(func):\n    if asyncio.iscoroutinefunction(func):\n        @functools.wraps(func)",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -963,7 +997,7 @@
         "kind": 5,
         "importPath": "nadoo_connect.nadoo_email",
         "description": "nadoo_connect.nadoo_email",
-        "peekOfCode": "error_handler = logging.FileHandler(os.path.join(logs_dir, \"error_logs.log\"))\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\n# Decorator for enhanced error logging\ndef log_errors(func):\n    async def async_wrapper(*args, **kwargs):\n        try:\n            return await func(*args, **kwargs)",
+        "peekOfCode": "error_handler = logging.FileHandler(os.path.join(logs_dir, \"error_logs.log\"))\nerror_handler.setFormatter(\n    logging.Formatter(\"%(asctime)s - %(levelname)s - %(message)s\")\n)\nerror_logger.addHandler(error_handler)\ndef log_errors(func):\n    if asyncio.iscoroutinefunction(func):\n        @functools.wraps(func)\n        async def async_wrapper(*args, **kwargs):\n            try:",
         "detail": "nadoo_connect.nadoo_email",
         "documentation": {}
     },
@@ -1080,7 +1114,7 @@
         "kind": 2,
         "importPath": "tests.test_email",
         "description": "tests.test_email",
-        "peekOfCode": "def test_is_valid_email():\n    assert is_valid_email(\"test@example.com\") == True\n    assert is_valid_email(\"invalidemail\") == False\n@pytest.mark.asyncio\nasync def test_get_default_email_account(setup_database_for_testing):\n    test_db_name = setup_database_for_testing\n    # Your test code using test_db_name\n    # Set up an in-memory SQLite database\n    async with aiosqlite.connect(test_db_name) as conn:\n        # Create the email_accounts table and insert test data",
+        "peekOfCode": "def test_is_valid_email():\n    assert is_valid_email(\"test@example.com\") == True\n    assert is_valid_email(\"invalidemail\") == False\n@pytest.mark.asyncio\nasync def test_get_default_email_account(setup_database_for_testing):\n    test_db_name = setup_database_for_testing\n    # Set up an in-memory SQLite database\n    async with aiosqlite.connect(test_db_name) as conn:\n        # Create the email_accounts table and insert test data\n        await conn.execute(",
         "detail": "tests.test_email",
         "documentation": {}
     },
@@ -1226,6 +1260,33 @@
         "description": "venv.bin.rstpep2html",
         "peekOfCode": "description = ('Generates (X)HTML from reStructuredText-format PEP files.  '\n               + default_description)\npublish_cmdline(reader_name='pep', writer_name='pep_html',\n                description=description)",
         "detail": "venv.bin.rstpep2html",
+        "documentation": {}
+    },
+    {
+        "label": "EmailAccountDialog",
+        "kind": 6,
+        "importPath": "install",
+        "description": "install",
+        "peekOfCode": "class EmailAccountDialog(tk.simpledialog.Dialog):\n    def body(self, master):\n        self.entries = {}\n        Label(master, text=\"POP Server:\").grid(row=0)\n        self.entries[\"pop_server\"] = Entry(master)\n        self.entries[\"pop_server\"].grid(row=0, column=1)\n        Label(master, text=\"POP Port:\").grid(row=1)\n        self.entries[\"pop_port\"] = Entry(master)\n        self.entries[\"pop_port\"].grid(row=1, column=1)\n        Label(master, text=\"SMTP Server:\").grid(row=2)",
+        "detail": "install",
+        "documentation": {}
+    },
+    {
+        "label": "get_email_account_from_user",
+        "kind": 2,
+        "importPath": "install",
+        "description": "install",
+        "peekOfCode": "def get_email_account_from_user():\n    def run_dialog():\n        root = tk.Tk()\n        root.withdraw()  # Hide the main window\n        dialog = EmailAccountDialog(root, title=\"Enter Email Account Details\")\n        result = dialog.result\n        root.destroy()\n        return result\n    email_account = run_dialog()\n    return email_account",
+        "detail": "install",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "install",
+        "description": "install",
+        "peekOfCode": "def main():\n    setup_database(email_account_db_name=\"email_account.db\")\n    email_account = get_email_account_from_user()\n    print(email_account)\n    if email_account:\n        asyncio.run(\n            save_email_account(\n                email_account_db_name=\"email_account.db\", email_account=email_account\n            )\n        )",
+        "detail": "install",
         "documentation": {}
     }
 ]
