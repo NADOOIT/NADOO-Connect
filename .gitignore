@@ -167,5 +167,4 @@ email_account.db
 # Executions
 executions/*
 *.db
-email_account.db
-email_account.db
+
